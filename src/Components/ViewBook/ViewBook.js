@@ -6,14 +6,31 @@ import CommentCard from './CommentCard/CommentCard'
 
 const ViewBook = () => {
 
-  const comments = {
-    name:'Amshen Yesudas',
-    image:'https://avatars.githubusercontent.com/u/65121810?v=4',
-    like:'5678',
-    unlike:'124',
-    comment:"Nick's been feeling the same, but he's got a lot on his mind - not least coming out to his dad, ajnd the fact that Charlie might have an eating disorder.",
-
-  }
+  const comments = [
+    {
+      name:'Amshen Yesudas',
+      image:'https://avatars.githubusercontent.com/u/65121810?v=4',
+      like:'5678',
+      unlike:'124',
+      comment:"Nick's been feeling the same, but he's got a lot on his mind - not least coming out to his dad, ajnd the fact that Charlie might have an eating disorder.",
+  
+    },
+    {
+      name:'Mushin',
+      image:'https://avatars.githubusercontent.com/u/65121810?v=4',
+      like:'1535',
+      unlike:'124',
+      comment:"Nick's been feeling the same, but he's got a lot on his mind - not least coming out to his dad, ajnd the fact that Charlie might have an eating disorder.",
+  
+    },{
+      name:'Rishad',
+      image:'https://avatars.githubusercontent.com/u/65121810?v=4',
+      like:'9000',
+      unlike:'124',
+      comment:"Nick's been feeling the same, but he's got a lot on his mind - not least coming out to his dad, ajnd the fact that Charlie might have an eating disorder.",
+  
+    }
+  ]
 
 
     return (
@@ -69,7 +86,11 @@ const ViewBook = () => {
             <button>Write your Review</button>
         </div>
         <hr/>
-        <CommentCard {...comments}/>
+        {
+          comments.map((d,i)=>(
+            <CommentCard {...d} key={i} />
+          ))
+        }
       </div>
     );
 }
