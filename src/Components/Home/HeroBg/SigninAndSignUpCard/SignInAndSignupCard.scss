@@ -1,0 +1,28 @@
+@import '/src/Components/Variables/variables';
+@import '/src/Components/Mixins/mixins';
+
+.signin-card{
+    @include justifyAndAliginAndDirection(center,center,column);
+    padding: 3rem 2rem;
+    border-radius: 10px;
+    color: #222222;
+    font-family: $raleway;
+    margin: 0 1rem;
+    h3{
+        margin-bottom: 1rem;
+        font-size: 1.5rem;
+    }
+    .have-or-not{
+        font-weight: 600;
+        @include linkDecorationNone(rgb(0, 0, 93));
+    }
+}
+@media only screen and (max-width: 500px){
+    .signin-card{ 
+        padding: 2rem 1.5rem;
+        margin-top: 1rem;
+        .have-or-not{
+            font-size: 0.8rem;
+        }
+    }
+}
