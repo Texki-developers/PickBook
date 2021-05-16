@@ -1,0 +1,38 @@
+@import '/src/Components/Variables/variables';
+@import '/src/Components/Mixins/mixins';
+
+.sign-btn {
+    @include linkDecorationNone(#fff);
+    @include justifyAndAlign(flex-start,center);
+	border: none;
+	height: 3rem;
+	width: 18rem;
+	text-align: start;
+	padding-left: 1rem;
+	font-size: 1.3rem;
+    font-weight: 600;
+    margin:1rem 0;
+    i{
+        background-color: transparent;
+        margin-right: 1rem;
+    }
+}
+.google{
+    background-color: #DB4437;
+    i{
+        font-size: 1rem;
+    }
+}
+.fb{
+    background-color: #4267B2;
+}
+.phone{
+    background-color: #EBB51C;
+}
+@media only screen and (max-width:500px){
+    .sign-btn {
+        width: 14rem;
+        font-size: 1rem;
+        margin: 0.5rem 0;
+    }
+}

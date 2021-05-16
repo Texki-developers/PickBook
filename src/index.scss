@@ -1,8 +1,11 @@
+@import './Components/Variables/variables';
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   background-color: #fbfaf5;
+  font-family: $raleway;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
