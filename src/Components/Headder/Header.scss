@@ -71,3 +71,24 @@
         height: 50%;
     }
 }
+
+
+
+
+@media screen and (max-width:500px) {
+    .header_container{
+        justify-content: center;
+    
+        h1{
+            font-size: 18px;
+        }
+    
+        .search_container{
+            display: none;
+        }
+    
+        .MuiSvgIcon-root{
+            display: none;
+        }
+    }    
+}
