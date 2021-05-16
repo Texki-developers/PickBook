@@ -1,0 +1,42 @@
+@import '/src/Components/Variables/variables';
+
+.add-icon-large {
+	width: 5rem;
+	height: 5rem;
+	border-radius: 50%;
+	border: 2px solid #fff;
+	background-color: #291f3d;
+	position: fixed;
+	right: 0;
+	top: 50vh;
+	z-index: 2;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #fff;
+	font-size: 2rem;
+    font-weight: 800;
+    cursor: pointer;
+    .add-dailogue {
+        color: #fff;
+        background-color: rgba(0, 0, 0, 0.7);
+        position: absolute;
+        bottom: -24%;
+        font-size: 0.8rem;
+        width: 5rem;
+        text-align: center;
+        font-weight: 600;
+        opacity: 0;
+        transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    &:hover .add-dailogue{
+        opacity: 1;
+    }
+}
+@media only screen and (max-width:768px){
+    .add-icon-large{
+        .add-dailogue{
+            display: none;
+        }
+    }
+}

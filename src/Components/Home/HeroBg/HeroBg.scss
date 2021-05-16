@@ -9,6 +9,7 @@
     background-repeat: no-repeat;
     background-position: left;
     position: relative;
+    overflow: hidden;
     
     .herobg-overlay{
         @include justifyAndAlign(space-around,center);
