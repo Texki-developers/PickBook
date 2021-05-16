@@ -1,6 +1,7 @@
 import {BrowserRouter as Router,Switch,Route} from 'react-router-dom';
 import Home from './Components/Home/Home';
 import Header from './Components/Headder/Header'
+import ViewBook from './Components/ViewBook/ViewBook'
 import AddIcon from './Components/AddIcon/AddIcon';
 
 function App() {
@@ -15,8 +16,8 @@ function App() {
         <Route path="/add-book">
           <h1>Add book</h1>
         </Route>
-        <Route path="book">
-          <h1>view book</h1>
+        <Route path="/book">
+          <ViewBook/>
         </Route>
       </Switch>
     </Router>
