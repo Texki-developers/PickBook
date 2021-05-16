@@ -9,6 +9,7 @@ const HeroBg = () => {
                 <h1>Read&Build <br/>Knowledge</h1>
                 <SignInAndSignupCard/>
             </div>
+            
         </div>
     )
 }

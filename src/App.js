@@ -1,11 +1,13 @@
 import {BrowserRouter as Router,Switch,Route} from 'react-router-dom';
 import Home from './Components/Home/Home';
 import Header from './Components/Headder/Header'
+import AddIcon from './Components/AddIcon/AddIcon';
 
 function App() {
   return (
     <Router>
       <Header/>
+      <AddIcon/>
       <Switch>
         <Route path="/" exact>
           <Home/>

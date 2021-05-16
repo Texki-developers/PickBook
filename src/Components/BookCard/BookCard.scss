@@ -1,0 +1,22 @@
+
+.bookCard {
+	width: 17rem;
+	height: 27.3rem;
+	margin: 1rem;
+	display: inline-block;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+@media only screen and (max-width: 768px){
+    .bookCard{
+        width: 13rem;
+        height: 20.3rem;
+    }
+}
+@media only screen and (max-width:420px){
+    .bookCard{
+        width: 10rem;
+        height: 15.3rem;
+    }
+}

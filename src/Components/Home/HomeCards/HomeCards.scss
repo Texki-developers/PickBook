@@ -1,0 +1,49 @@
+@import '/src/Components/Mixins/mixins';
+
+.home-cards{
+    @include justifyAndAliginAndDirection(center,center,column);
+    width: 100%;
+    padding: 4rem 0 0 0;
+    text-align: left;
+    h2{
+        font-size: 2.5rem;
+        margin-bottom: 1rem
+    }
+    .cards-slide{
+        @include justifyAndAlign(center,center);
+        overflow: hidden;
+        flex-wrap: wrap;
+        padding: 1rem;
+        max-width: 1400px;
+    }
+}
+@media only screen and (max-width:768px){
+    .home-cards{
+        h2{
+            width: 100%;
+            padding: 0 2rem;
+            font-size: 1.8rem;
+        }
+        .cards-slide{
+            width: 100%;
+            display: block;
+            white-space: nowrap;
+            overflow-x: scroll;
+            -webkit-overflow-scrolling: touch;
+            &::-webkit-scrollbar {
+                display: none;
+              }
+        }
+    }
+}
+@media only screen and (max-width:420px){
+    .home-cards{
+        h2{
+            font-size: 1.3rem;
+            padding: 0 1rem;
+        }
+        .cards-slide{
+            padding: 0;
+        }
+    }
+}
