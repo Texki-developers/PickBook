@@ -1,12 +1,13 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import './AddIcon.scss'
 const AddIconButton = () => {
     return (
         <div className="add-icon-large">
             <i class="fas fa-plus"></i>
-            <p className="add-dailogue">
+            <Link to="/add-book" className="add-dailogue">
                 Add Books
-            </p>
+            </Link>
         </div>
     )
 }

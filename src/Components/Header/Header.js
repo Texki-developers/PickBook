@@ -1,21 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Header.scss'
 import FilterListIcon from '@material-ui/icons/FilterList';
 import SearchIcon from '@material-ui/icons/Search';
 import PersonIcon from '@material-ui/icons/Person';
+import Filter from '../Filter/Filter';
 
 function Header() {
+    const [filter,setFilter] = useState(false);
+    console.log(filter);
     return (
         <div className='header_container'>
             <h1><strong>PICK</strong>BOOKS</h1>
 
             <div className="search_container">
-                <button>Filter<FilterListIcon/></button>
+                <button onClick={()=>setFilter(!filter)}>Filter<FilterListIcon/></button>
                 <input type="text" 
                 placeholder='Search books, generes, authors......' />
                 <SearchIcon/>
             </div>
-            <PersonIcon/>
+            {filter?<Filter/>:<PersonIcon/>}
         </div>
     )
 }
