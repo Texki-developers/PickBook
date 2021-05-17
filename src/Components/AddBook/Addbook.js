@@ -19,10 +19,10 @@ const Addbook = () => {
 
              <form className={classes.root} id="frm" noValidate autoComplete="off">
                  <div className="inputs-container">
-                   <canvas id="Canvas" width="72" height="91"></canvas>
-                   <input  type="file" name="img" id="img" />
-                   
-                   <label className="cover">cover Photo</label>
+
+                 <input type="file" id="upload" hidden/>
+                 <label id="cover"for="upload"></label>
+                 <label id="title">Cover photo</label>
                  </div>
                  <div className="inputs-container">
                  <TextField className="inputs" label="IBN Number" name='name'/>

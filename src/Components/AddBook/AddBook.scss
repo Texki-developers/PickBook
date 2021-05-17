@@ -24,6 +24,7 @@
     .inputs-container{
         display: flex;
         width: 100%;
+        margin-left: 3.5rem;
    
     .MuiFormControl-root{
         
@@ -31,25 +32,47 @@
         
     }
     .inputs{
-       width: 50%;
+       width: 44%;
     }
 
     .description{
-        min-width: 100%;
+        min-width: 90%;
    
     }   
     .input_cent{
-        width: 33%;
+        width: 29%;
          
     }
         
     }
-    .cover{
-        margin-right: 10rem;
-        width: 100%;
-    }
-  #canvas{
-      color: red;
-  }
+    #upload {
+       
+        color: #2E313A;
+        padding: 0.5rem;
+        font-family: sans-serif;
+        border-radius: 0.3rem;
+        cursor: pointer;
+        margin-top: 1rem;
+      }
+      #cover{
+        display: inline-block;
+        font-size: 50%;
+        color: #2E313A;
+        padding: 0.8rem;
+        font-family: sans-serif;
+        border-radius: 0.1rem;
+        cursor: pointer;
+        margin-top: 1rem;
+        margin-left: 0.6rem;
+        width: 72px;
+        height:91px;
+        background-color: #C4C4C4;
+      }
+      #title{
+          margin-top: 3rem;
+          padding-left: 1rem;
+          color: #2E313A;
+
+      }
     
 }
