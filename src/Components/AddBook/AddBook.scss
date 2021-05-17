@@ -1,0 +1,36 @@
+@import '/src/Components/Variables/variables';
+@import '/src/Components/Mixins/mixins';
+
+
+
+.add_book_container{
+    @include justifyAndAliginAndDirection(center,center,column);
+    width: 100%;
+    .heading_book{
+     padding-top: 2.5rem;
+     font-size: 2rem;
+     font-weight: bold;
+     color: #2E313A;
+
+    }
+  
+
+}
+#frm{
+    max-width: 1253px;
+    
+    
+    .inputs-container{
+        display: flex;
+        width: 100%;
+   
+    .MuiFormControl-root{
+        
+    //    min-width: 100%;
+        margin: 0.5rem;
+        
+    }   
+        
+    }
+    
+}
