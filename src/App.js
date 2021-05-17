@@ -5,6 +5,10 @@ import ViewBook from './Components/ViewBook/ViewBook'
 import AddIcon from './Components/AddIcon/AddIcon';
 import { useSelector } from 'react-redux';
 import Filter from './Components/Filter/Filter'
+import BookList from './Components/BookList/BookList'
+import Footer from './Components/Footer/Footer'
+import AddBook from './Components/AddBook/Addbook'
+
 function App() {
   const filter = useSelector(state => state.filter)
   return (
@@ -17,12 +21,16 @@ function App() {
           <Home/>
         </Route>
         <Route path="/add-book">
-          <h1>Add book</h1>
+          <AddBook/>
         </Route>
         <Route path="/book">
           <ViewBook/>
         </Route>
+        <Route path="/booklist">
+          <BookList/>
+        </Route>
       </Switch>
+      <Footer/>
     </Router>
   );
 }

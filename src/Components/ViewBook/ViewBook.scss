@@ -6,7 +6,6 @@
     width: 80%;
     margin: 0 10%;
     align-items: center;
-    // height: 5000px;
     .book_container{
         display: flex;
         width: 70%;
@@ -46,6 +45,7 @@
                     border-radius: 3px;
                     margin: 0 15px 0;
                     color: black;
+                    cursor: pointer;
                 }
             }
 
@@ -58,6 +58,7 @@
                 padding: 10px;
                 border-radius: 3px;
                 margin: 25px 0 0;
+                cursor: pointer;
             }
         }
     }
@@ -84,12 +85,13 @@
 
         .review_details{
             display: flex;
-            font-family: $montserrat;
             align-items: center;
 
             .MuiSvgIcon-root{
                 color: rgba(255, 209, 121, 1);
-
+            }
+            p{
+                font-family: $montserrat;
             }
         }
 
@@ -101,6 +103,7 @@
             font-family: $raleway;
             outline: none;
             border: 0;
+            cursor: pointer;
             border-radius: 3px;
             margin: 25px 0 30px;
         }
@@ -110,13 +113,13 @@
 
 
 
-@media screen and (max-width:750px) {
+@media screen and (max-width:768px) {
     .viewbook_container{
         width:100%;
         justify-content: flex-start;
         align-items: flex-start;
-        margin: 13% 5px 0;
-        padding: 5px;
+        margin: 13% 0 0;
+        padding:0 5px 0;
         
         .book_container{
             width: 100%;
@@ -134,7 +137,7 @@
                 }
     
                 p{
-                    font-size: 12px;
+                    font-size: 14px;
                 }
     
                 .star_review{
@@ -161,7 +164,7 @@
         }
     
         .book_description{
-            font-size: 10px;
+            font-size: 13px;
         }
     
         hr{
@@ -180,13 +183,36 @@
 }
 
 
+@media screen and (max-width:1078px){
+    .viewbook_container{
+        .book_container{
+            .book_detail{
+                .star_review{
+                    button{
+                        font-size: 12px;
+                        width: 100px;
+                    }
+                }
+                
+                h1{
+                    font-size: 26px;
+                }
+                p{
+                    font-size: 18px;
+                }
+
+            }
+        }
+    }
+}
+
 @media screen and (max-width:500px) {
     .viewbook_container{
         width:100%;
         justify-content: flex-start;
         align-items: flex-start;
-        margin: 18% 5px 0;
-        padding: 3px;
+        margin: 18% 0 0;
+        padding:3px;
         
         .book_container{
             width: 100%;
@@ -231,7 +257,7 @@
         }
     
         .book_description{
-            font-size: 10px;
+            font-size: 12px;
         }
     
         hr{

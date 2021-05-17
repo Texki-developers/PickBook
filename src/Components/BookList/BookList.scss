@@ -1,0 +1,43 @@
+@import '../Variables/variables';
+
+.booklist_container{
+    margin-top: 8%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .booklist_list{
+        width: 100vw;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+
+    }
+    .pagination{
+        display: flex;
+        align-items: center;
+
+        p{
+            padding: 3px;
+            margin: 5px;
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
+            background: $violet;
+            color: white;
+            border-radius: 3px;
+        }
+        
+        .MuiSvgIcon-root{
+            color: $violet;
+            cursor: pointer;
+        }
+    }
+}
+
+@media screen and (max-width:545px) {
+    .booklist_container{
+        margin-top: 18%;
+    }
+}
