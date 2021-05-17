@@ -18,7 +18,7 @@ const Addbook = () => {
             <h2 className="heading_book">Add Book</h2>
 
              <form className={classes.root} id="frm" noValidate autoComplete="off">
-                 <div className="inputs-container">
+                 <div className="inputs-container photo_upload">
 
                  <input type="file" id="upload" hidden/>
                  <label id="cover"for="upload"></label>
