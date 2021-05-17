@@ -17,12 +17,13 @@
 
 }
 #frm{
+    
     max-width: 1253px;
     width: 80%;
    
     
     .inputs-container{
-        display: flex;
+        
         width: 100%;
         margin-left: 3.5rem;
    
@@ -72,7 +73,42 @@
           margin-top: 3rem;
           padding-left: 1rem;
           color: #2E313A;
+          justify-content: center;
+          align-items: center;
 
       }
     
 }
+@media screen and (max-width:1253px) {
+      
+
+    .add_book_container{
+       
+       width: 80%;
+      
+    }
+    .inputs-container{
+        
+        .inputs{
+            min-width: 100%;
+            
+    }
+
+    .input_cent{
+        
+        min-width: 100%;
+        
+    
+    }
+     .MuiFormControl-root{
+         padding-right: 3rem;
+         width: 100%;
+     }
+    
+
+}
+
+
+
+}
+ 
