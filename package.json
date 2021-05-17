@@ -16,11 +16,8 @@
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
-<<<<<<< HEAD
     "redux": "^4.0.5",
-=======
     "resolve": "^1.18.1",
->>>>>>> 003ed8025a7eb387ac5480577367800d1fc2ac14
     "web-vitals": "^1.1.2"
   },
   "scripts": {
