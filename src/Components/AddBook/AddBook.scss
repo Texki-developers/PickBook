@@ -18,7 +18,8 @@
 }
 #frm{
     max-width: 1253px;
-    
+    width: 80%;
+   
     
     .inputs-container{
         display: flex;
@@ -26,11 +27,29 @@
    
     .MuiFormControl-root{
         
-    //    min-width: 100%;
         margin: 0.5rem;
         
+    }
+    .inputs{
+       width: 50%;
+    }
+
+    .description{
+        min-width: 100%;
+   
     }   
+    .input_cent{
+        width: 33%;
+         
+    }
         
     }
+    .cover{
+        margin-right: 10rem;
+        width: 100%;
+    }
+  #canvas{
+      color: red;
+  }
     
 }
