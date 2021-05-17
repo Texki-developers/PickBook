@@ -3,10 +3,13 @@ import Home from './Components/Home/Home';
 import Header from './Components/Header/Header'
 import ViewBook from './Components/ViewBook/ViewBook'
 import AddIcon from './Components/AddIcon/AddIcon';
-
+import { useSelector } from 'react-redux';
+import Filter from './Components/Filter/Filter'
 function App() {
+  const filter = useSelector(state => state.filter)
   return (
     <Router>
+      {filter?<Filter/>:''}
       <Header/>
       <AddIcon/>
       <Switch>
