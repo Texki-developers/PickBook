@@ -7,7 +7,7 @@ import PersonIcon from '@material-ui/icons/Person';
 function Header() {
     return (
         <div className='header_container'>
-            <h1><strong>PIC</strong>BOOKS</h1>
+            <h1><strong>PICK</strong>BOOKS</h1>
 
             <div className="search_container">
                 <button>Filter<FilterListIcon/></button>
