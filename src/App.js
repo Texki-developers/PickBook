@@ -5,6 +5,7 @@ import ViewBook from './Components/ViewBook/ViewBook'
 import AddIcon from './Components/AddIcon/AddIcon';
 import BookList from './Components/BookList/BookList'
 import Footer from './Components/Footer/Footer'
+import AddBook from './Components/AddBook/Addbook'
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
           <Home/>
         </Route>
         <Route path="/add-book">
-          <h1>Add book</h1>
+          <AddBook/>
         </Route>
         <Route path="/book">
           <ViewBook/>
