@@ -1,0 +1,30 @@
+@import '/src/Components/Variables/variables';
+.year-selector-container{
+    width: 100%;
+    .year-selector{
+        width: 100%;
+        height: 6px;
+        border-radius: 10px;
+        outline: none;
+        appearance: none;
+        -webkit-appearance: none;
+        background :#F1B746;
+        &::-webkit-slider-thumb{
+            -webkit-appearance: none;
+            appearance: none;
+            width: 1.5rem;
+            cursor: pointer;
+            height: 1.5rem;
+            border: 2px solid #fff;
+            border-radius: 50%;
+            background: $violet;
+        }
+    }
+    p{
+        text-align: center;
+        color: #fff;
+        font-family: $montserrat;
+        font-weight: 600;
+        padding: 1rem;
+    }
+}

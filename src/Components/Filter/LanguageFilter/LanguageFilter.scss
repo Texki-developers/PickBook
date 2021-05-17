@@ -1,0 +1,35 @@
+@import '/src/Components/Variables/variables';
+
+.language-filter{
+    margin: 1rem auto;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 1rem;
+    transition: $transitionThree;
+    header{
+        cursor: pointer;
+        transition: $transitionThree;
+        &:hover{
+            background-color: rgba(255, 255, 255, 0.03);
+        }
+    }
+    .filter-drop{
+        font-size: 1.8rem;
+        cursor: pointer;
+        transition: $transitionThree;
+        path{
+            stroke: #fff;
+        }
+    }
+    .filter-option{
+        display: flex;
+        flex-wrap: wrap;
+        transition: $transitionThree;
+    }
+    .filter-option-close{
+        height: 0;
+        display: none;
+    }
+    .filter-drop-active{
+        transform: rotate(180deg);
+    }
+}
