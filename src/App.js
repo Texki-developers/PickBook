@@ -3,6 +3,7 @@ import Home from './Components/Home/Home';
 import Header from './Components/Header/Header'
 import ViewBook from './Components/ViewBook/ViewBook'
 import AddIcon from './Components/AddIcon/AddIcon';
+import BookList from './Components/BookList/BookList'
 
 function App() {
   return (
@@ -18,6 +19,9 @@ function App() {
         </Route>
         <Route path="/book">
           <ViewBook/>
+        </Route>
+        <Route path="/booklist">
+          <BookList/>
         </Route>
       </Switch>
     </Router>
