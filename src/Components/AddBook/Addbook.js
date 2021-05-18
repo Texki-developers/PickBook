@@ -27,6 +27,12 @@ const Addbook = () => {
     const handleChange = (event) => {
       
     };
+    const viewImage= (event)=>{
+      console.log(event)
+
+
+    }
+  
     
     return (
         <div className="add_book_container">
@@ -36,7 +42,7 @@ const Addbook = () => {
                  <div className="inputs-container photo_upload">
 
                  <input type="file" id="upload" hidden/>
-                 <label id="cover"for="upload" >ADD PHOTO</label>
+                 <label id="cover"for="upload" onChange={viewImage}  >ADD PHOTO</label>
                  <label id="title">Cover photo</label>
                  </div>
                  <div className="inputs-container">
