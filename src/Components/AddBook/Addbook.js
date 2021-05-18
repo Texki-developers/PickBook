@@ -8,11 +8,26 @@ const useStyles = makeStyles((theme) => ({
       '& > *': {
         margin: theme.spacing(1),
         width: '25ch',
-      },
+      },'& .MuiTextField-root': {
+      margin: theme.spacing(1),
+      width: 200,
     },
+    }
   }));
+  
+    
+  
+
+
 const Addbook = () => {
+  
+  
     const classes = useStyles();
+    const [value, setValue] = React.useState('Controlled');
+    const handleChange = (event) => {
+      
+    };
+    
     return (
         <div className="add_book_container">
             <h2 className="heading_book">Add Book</h2>
@@ -21,7 +36,7 @@ const Addbook = () => {
                  <div className="inputs-container photo_upload">
 
                  <input type="file" id="upload" hidden/>
-                 <label id="cover"for="upload"></label>
+                 <label id="cover"for="upload" >ADD PHOTO</label>
                  <label id="title">Cover photo</label>
                  </div>
                  <div className="inputs-container">
@@ -39,8 +54,10 @@ const Addbook = () => {
 
                  </div >
                  
-                 <div className="inputs-container" >
-                 <TextField className="description" label="Description" name='name'/>
+                 <div className="inputs-container " >
+                 <TextField className="description" multiline rowsMax={4} 
+                           onChange={handleChange} label="Description" name='name'/>
+                 
                  </div>
                  </form>    
         </div>
