@@ -1,9 +1,37 @@
-import React from 'react'
+import React, {useState} from 'react'
 import './CommentCard.scss'
 import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
+import ThumbDownAltOutlinedIcon from '@material-ui/icons/ThumbDownAltOutlined';
+import ThumbUpIcon from '@material-ui/icons/ThumbUp';
+import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 
 
 function CommentCard(props) {
+
+  const [liked,setLiked] = useState(false)
+  const [unliked,setUnliked] = useState(false)
+
+  const like = ()=>{
+    if(liked){
+      setLiked(false)
+    }else if(unliked){
+      setUnliked(false)
+      setLiked(true)
+    }else{
+      setLiked(true)
+    }
+  }
+
+  const unlike = ()=>{
+    if(unliked){
+      setUnliked(false)
+    }else if(liked){
+      setLiked(false)
+      setUnliked(true)
+    }else{
+      setUnliked(true)
+    }
+  }
     return (
       <div className="comment_container">
         <div id="user_name">
@@ -18,10 +46,10 @@ function CommentCard(props) {
         </p>
         <div id="like_container">
             <div className="like_up">
-              <ThumbUpAltOutlinedIcon/><span>{props.like}</span>
+              {liked?<ThumbUpIcon onClick={like}/>:<ThumbUpAltOutlinedIcon onClick={like}/>}<span>{props.like}</span>
             </div>
             <div className="like_down">
-              <ThumbUpAltOutlinedIcon/><span>{props.unlike}</span>
+              {unliked?<ThumbDownIcon onClick={unlike}/>:<ThumbDownAltOutlinedIcon onClick={unlike}/>}<span>{props.unlike}</span>
             </div>
         </div>
         <hr />
