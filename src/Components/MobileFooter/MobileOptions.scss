@@ -1,0 +1,24 @@
+@import '/src/Components/Mixins/mixins';
+.mobile-options{
+    text-align: center;
+    font-weight: 600;
+    font-size: .8rem;
+    cursor: pointer;
+    position: relative;
+    @include linkDecorationNone(#fff);
+    svg{
+        font-size: 1rem;
+        path{
+            stroke: #fff;
+        }
+    }
+    .for-click{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: transparent;
+        z-index: 4;
+        top: 0;
+        left: 0;
+    }
+}
