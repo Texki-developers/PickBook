@@ -50,6 +50,7 @@
         width: 29%;
          
     }
+  
         
     
     #upload {
@@ -89,9 +90,25 @@
          
       }
     
-      }
     
+      }
+      .ab-button-container{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+        .ab-button{
+            width: 200px;
+            height: 50px;
+            background-color: #2E313A;
+            color: white;
+            border-radius: 0.3rem;
+            margin-top: 1rem;
+            
+        }
+    }
 }
+
 @media screen and (max-width:768px) {
       
 
@@ -131,6 +148,7 @@
          margin-left: 0;
 
      }
+     
     }
 
 }

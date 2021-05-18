@@ -65,6 +65,10 @@ const Addbook = () => {
                            onChange={handleChange} label="Description" name='name'/>
                  
                  </div>
+                 <div className="ab-button-container">
+                   
+                  <button className="ab-button" type="submit">Add Book</button>
+                 </div>
                  </form>    
         </div>
     )
