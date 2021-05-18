@@ -12,6 +12,7 @@
      font-size: 2rem;
      font-weight: bold;
      color: #2E313A;
+     
 
     }
   
@@ -99,23 +100,35 @@
       
     }
     #frm{
+
+
     .inputs-container{
-        
+        margin: 0;
+       
         
         .inputs{
+            
             min-width: 100%;
+            margin: 0;
+            
             
     }
 
     .input_cent{
-        
+        margin: 0;
         min-width: 100%;
+      
         
     
     }
      .MuiFormControl-root{
-         
+         margin: 0;;
          width: 100%;
+         
+     }
+     #cover{
+         margin-left: 0;
+
      }
     }
 
