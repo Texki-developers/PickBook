@@ -1,0 +1,14 @@
+@import '/src/Components/Mixins/mixins';
+@media only screen and (max-width:768px){
+    .mobile-footer {
+        width: 100%;
+        background-color: #291f3d;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        @include justifyAndAlign(space-around,center);
+        color: #fff;
+        padding: .5rem 0;
+        z-index: 3;
+    }
+}

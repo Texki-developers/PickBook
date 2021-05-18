@@ -8,12 +8,14 @@ import Filter from './Components/Filter/Filter'
 import BookList from './Components/BookList/BookList'
 import Footer from './Components/Footer/Footer'
 import AddBook from './Components/AddBook/Addbook'
+import MobileFooter from './Components/MobileFooter/MobileFooter';
 
 function App() {
   const filter = useSelector(state => state.filter)
   return (
     <Router>
       {filter?<Filter/>:''}
+      <MobileFooter/>
       <Header/>
       <AddIcon/>
       <Switch>
