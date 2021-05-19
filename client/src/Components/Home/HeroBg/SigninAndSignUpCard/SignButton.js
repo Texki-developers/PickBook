@@ -8,6 +8,7 @@ function SignButton(props) {
     const dispatch = useDispatch();
     const handleAuth = (provider) => {
         socialMediaAuth(provider).then((userData) => {
+            
             dispatch(Actions.addUserData(userData));
         })
         console.log('login process');

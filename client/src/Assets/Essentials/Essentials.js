@@ -18,7 +18,7 @@ const essential = (state={...essentials},action) => {
             return newstate;
 
         case 'ADD_USER_DATA':
-            var newState = {...state,userData:action.payload};
+            var newState = {...state,userData:action.payload, isLogin:true};
             return newState;
         default:
             return state;
