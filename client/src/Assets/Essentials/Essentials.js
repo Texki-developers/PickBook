@@ -14,8 +14,8 @@ const essential = (state={...essentials},action) => {
             return state;
 
         case 'TOGGLE_FILTER':
-            var newstate = {...state,filter:!state.filter}
-            return newstate;
+            state = {...state,filter:!state.filter}
+            return state;
 
         case 'ADD_USER_DATA':
             var newState = {...state,userData:action.payload, isLogin:true};
