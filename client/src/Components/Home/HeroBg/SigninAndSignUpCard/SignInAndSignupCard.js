@@ -1,5 +1,5 @@
 import React from 'react'
-import { facebookProvider, googleProvider } from '../../../../FirebaseConfig/authMethod';
+import { facebookProvider, googleProvider } from '../../../../Assets/FirebaseConfig/authMethod';
 import SignButton from './SignButton';
 import './SignInAndSignupCard.scss';
 
