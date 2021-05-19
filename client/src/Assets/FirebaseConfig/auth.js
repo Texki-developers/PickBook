@@ -6,7 +6,7 @@ const socialMediaAuth = (provider) => {
     return firebase
     .auth()
     .signInWithPopup(provider)
-    .then(async(res) => {
+    .then((res) => {
        
         var userData={
             uid:res.user.uid,
@@ -16,7 +16,9 @@ const socialMediaAuth = (provider) => {
             photo:res.user.photoURL
         };
         
-        var loginServer = await instance.post('users/login',userData)
+     instance.post('users/login',userData).then(res=>{
+         
+     })
 
     }).catch((err) => {
         return err;
