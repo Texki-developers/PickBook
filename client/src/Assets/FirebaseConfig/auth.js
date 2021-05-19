@@ -6,8 +6,7 @@ const socialMediaAuth = (provider) => {
     return firebase
     .auth()
     .signInWithPopup(provider)
-    .then((res) => {
-       
+    .then(async(res) => {
         var userData={
             uid:res.user.uid,
             name:res.user.displayName,

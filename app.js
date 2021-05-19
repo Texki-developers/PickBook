@@ -6,7 +6,7 @@ var logger = require('morgan');
 var mongodb = require('./config/mongodb')
 var session = require('express-session')
 
-var indexRouter = require('./routes/index');
+var adminRouter = require('./routes/admin');
 var usersRouter = require('./routes/users');
 
 var app = express();
@@ -23,8 +23,8 @@ app.use(session({secret:'PickBook', saveUninitialized:true, resave:false,cookie:
 mongodb.connect()
 // app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/admin', adminRouter);
+app.use('/', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
