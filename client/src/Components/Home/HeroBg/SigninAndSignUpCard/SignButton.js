@@ -1,11 +1,15 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import socialMediaAuth from '../../../../Service/auth'
 import './SignButton.scss'
 function SignButton(props) {
+    const handleAuth = (provider) => {
+        const res = socialMediaAuth(provider);
+        console.log(res);
+    }
     return (
-        <Link to={props.api} className={props.class}>
+        <button onClick={() => handleAuth(props.provider)}  className={props.class}>
             <i className={props.icon}></i>{props.label}
-        </Link>
+        </button>
     )
 }
 
