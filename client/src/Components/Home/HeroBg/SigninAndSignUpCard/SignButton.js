@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
-import socialMediaAuth from '../../../../Service/auth'
+import React from 'react'
+import socialMediaAuth from '../../../../Assets/FirebaseConfig/auth'
 import './SignButton.scss'
+
 function SignButton(props) {
-    const handleAuth = async (provider) => {
-        const res = await socialMediaAuth(provider);
+    const handleAuth = (provider) => {
+        socialMediaAuth(provider);
+        console.log('login process');
     }
     return (
         <button onClick={() => handleAuth(props.provider)}  className={props.class}>
