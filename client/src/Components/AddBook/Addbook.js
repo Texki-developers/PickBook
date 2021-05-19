@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import './AddBook.scss'
+import { useSelector } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -15,16 +16,16 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-
-
-
-
 const Addbook = () => {
-  const [bookDetails,setBookDetails] = useState({})
   const classes = useStyles();
-  // const [value, setValue] = React.useState('Controlled');
+  const [bookDetails,setBookDetails] = useState({})
+  const [fileName,setFileName] = useState(null)
+  const userId = useSelector(state => state.essentials.userData.uid);
+
   const viewImage = (event) => {
-    console.log(event)
+    var date = new Date();
+    console.log(date.getTime());
+    setFileName(date.getTime()+"-"+date.getDate()+"-"+date.getFullYear()+"-"+date.getMonth()+userId)
   }
   
   const handleChange = (event) => {
@@ -33,8 +34,10 @@ const Addbook = () => {
       [event.target.name]:event.target.value
     })
   };
+
   const handleSubmit = (event) => {
     event.preventDefault();
+    console.log(fileName);
     console.log(bookDetails);
   }
 
@@ -45,8 +48,8 @@ const Addbook = () => {
       <form className={classes.root} id="frm" autoComplete="off" onSubmit={handleSubmit}>
         <div className="inputs-container photo_upload">
 
-          <input type="file" id="upload" hidden />
-          <label id="cover" for="upload" onChange={viewImage}  >ADD PHOTO</label>
+          <input type="file" id="upload" onChange={viewImage}  hidden />
+          <label id="cover" for="upload" >ADD PHOTO</label>
           <label id="title">Cover photo</label>
         </div>
         <div className="inputs-container">

@@ -7,7 +7,7 @@ const Actions = {
 
     toggleFilter:()=>({
         type:'TOGGLE_FILTER'
-    })
+    }),
 }
 
 
