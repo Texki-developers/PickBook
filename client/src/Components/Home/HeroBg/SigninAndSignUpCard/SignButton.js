@@ -1,10 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import socialMediaAuth from '../../../../Service/auth'
 import './SignButton.scss'
 function SignButton(props) {
-    const handleAuth = (provider) => {
-        const res = socialMediaAuth(provider);
-        console.log(res);
+    const handleAuth = async (provider) => {
+        const res = await socialMediaAuth(provider);
     }
     return (
         <button onClick={() => handleAuth(props.provider)}  className={props.class}>
