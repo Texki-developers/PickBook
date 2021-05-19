@@ -1,25 +1,27 @@
 import firebase from '../FirebaseConfig/firebaseConfig';
-import instance from '../server/instance' 
-
+import instance from '../server/instance'
 
 const socialMediaAuth = (provider) => {
-    return firebase
-    .auth()
-    .signInWithPopup(provider)
-    .then((res) => {
-        var userData={
-            uid:res.user.uid,
-            name:res.user.displayName,
-            mail:res.user.email,
-            phone:res.user.phoneNumber,
-            photo:res.user.photoURL
-        };
-        instance.post('/login',userData).then(res=>{
-            console.log(res);
-        })
+    return new Promise((resolve, reject) => {
+        return firebase
+            .auth()
+            .signInWithPopup(provider)
+            .then((res) => {
+               const userData = {
+                    uid: res.user.uid,
+                    name: res.user.displayName,
+                    mail: res.user.email,
+                    phone: res.user.phoneNumber,
+                    photo: res.user.photoURL
+                };
+                instance.post('/login', userData).then(res => {
+                    console.log(res);
+                    resolve(userData);
+                })
 
-    }).catch((err) => {
-        return err;
+            }).catch((err) => {
+                return err;
+            })
     })
 }
 export default socialMediaAuth;

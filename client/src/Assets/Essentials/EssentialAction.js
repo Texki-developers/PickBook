@@ -8,6 +8,10 @@ const Actions = {
     toggleFilter:()=>({
         type:'TOGGLE_FILTER'
     }),
+    addUserData : (userData) => ({
+        type:'ADD_USER_DATA',
+        payload: userData,
+    })
 }
 
 
