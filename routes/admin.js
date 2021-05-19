@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.json({amshen:'hello'})
+  res.json({amshen:'this is admin'})
 });
 
 module.exports = router;
