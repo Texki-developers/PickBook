@@ -14,12 +14,17 @@ const essential = (state={...essentials},action) => {
             return state;
 
         case 'TOGGLE_FILTER':
-            var newstate = {...state,filter:!state.filter}
-            return newstate;
+            state = {...state,filter:!state.filter}
+            return state;
 
         case 'ADD_USER_DATA':
-            var newState = {...state,userData:action.payload};
-            return newState;
+            state = {...state,userData:action.payload};
+            return state;
+
+        case 'IS_LOGGED_IN':
+            state = {...state,isLogin:!state.isLogin}
+            return state;
+            
         default:
             return state;
     }
