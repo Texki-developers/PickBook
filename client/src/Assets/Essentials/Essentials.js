@@ -1,14 +1,22 @@
-import actionTypes from "../ActionTypes"
 
 const essentials = {
+        isLogin:false,
+        userData:null,
+        filter:false,
         languages:["english","hindi","Tamil","urdu","malayalam"],
         genres:["fiction","children's","memoir","nonfiction","christian","cookbooks"]
 }
-const essential = (state={},action) => {
+
+const essential = (state={...essentials},action) => {
     switch(action.type){
-        case actionTypes.GET_ESSENTIALS:
+        case 'GET_ESSENTIALS':
             state = essentials
             return state;
+
+        case 'TOGGLE_FILTER':
+            var newstate = {...state,filter:!state.filter}
+            return newstate
+
         default:
             return state;
     }

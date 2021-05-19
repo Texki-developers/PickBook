@@ -11,10 +11,10 @@ import AddBook from './Components/AddBook/Addbook'
 import MobileFooter from './Components/MobileFooter/MobileFooter';
 
 function App() {
-  const filter = useSelector(state => state.filter)
+  const filter = useSelector(state => state.essentials)
   return (
     <Router>
-      {filter?<Filter/>:''}
+      {filter.filter?<Filter/>:false}
       <MobileFooter/>
       <Header/>
       <AddIcon/>
