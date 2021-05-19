@@ -6,8 +6,8 @@ router.get('/', function(req, res, next) {
   res.json({user:'user'});
 });
 
-router.get('/admin',(req,res)=>{
-  res.json({user:'admin'})
+router.post('/login',(req,res)=>{
+  console.log(req.body);
 })
 
 module.exports = router;
