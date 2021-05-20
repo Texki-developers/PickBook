@@ -1,4 +1,4 @@
-import {useEffect,useState} from 'react';
+import {useEffect} from 'react';
 import {BrowserRouter as Router,Switch,Route} from 'react-router-dom';
 import Home from './Components/Home/Home';
 import Header from './Components/Header/Header'
@@ -24,10 +24,11 @@ function App() {
       const userData = await instance.get('/checkuser');
       console.log(userData.data)
       if(userData.data.status){
-        dispatch(Actions.addUserData(userData))
+        dispatch(Actions.addUserData(userData.data.data))
       }
     }
     checkUser()
+    
   },[])
 
 
