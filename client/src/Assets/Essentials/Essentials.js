@@ -18,13 +18,8 @@ const essential = (state={...essentials},action) => {
             return state;
 
         case 'ADD_USER_DATA':
-            state = {...state,userData:action.payload};
-            return state;
-
-        case 'IS_LOGGED_IN':
-            state = {...state,isLogin:!state.isLogin}
-            return state;
-            
+            var newState = {...state,userData:action.payload, isLogin:true};
+            return newState;
         default:
             return state;
     }

@@ -1,7 +1,11 @@
 import firebase from '../FirebaseConfig/firebaseConfig';
 import instance from '../server/instance'
+import Action from '../Essentials/EssentialAction'
+
+
 
 const socialMediaAuth = (provider) => {
+
     return new Promise((resolve, reject) => {
         return firebase
             .auth()

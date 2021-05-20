@@ -3,12 +3,13 @@ import './Header.scss'
 import FilterListIcon from '@material-ui/icons/FilterList';
 import SearchIcon from '@material-ui/icons/Search';
 import PersonIcon from '@material-ui/icons/Person';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Actions from '../../Assets/Essentials/EssentialAction';
 
 
 function Header() {
     const dispath = useDispatch();
+    const essentials = useSelector(state=>state.essentials)
 
     const handleFilter = ()=>{
         dispath(Actions.getEssentials());
@@ -25,7 +26,7 @@ function Header() {
                 placeholder='Search books, generes, authors......' />
                 <SearchIcon/>
             </div>
-            <PersonIcon/>
+            {essentials.isLogin? <img src={essentials.userData.photo} alt="" />:<PersonIcon/>}
         </div>
     )
 }
