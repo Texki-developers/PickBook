@@ -15,7 +15,7 @@ module.exports = {
                 })
 
             }else{
-                resolve(data)
+                resolve(user[0])
             }
 
 
