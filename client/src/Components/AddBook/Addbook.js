@@ -37,27 +37,36 @@ const Addbook = () => {
     })
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    console.log("uploading file....");
-
-    await firebase.storage()
-      .ref(`cover-images/${fileName + file.name}`)
-      .put(file)
-      .then((
-        (snapShot) => console.log(snapShot),
-        (err) => console.log(err),
-        () => {
-          firebase.storage()
-            .ref('cover-images')
-            .child(fileName + file.name)
-            .getDownloadURL()
-            .then((url) => {
-              setImageURL(url)
-              console.log("finished");
-            })
-        }))
-      await console.log("url" , imageURL);
+  const storeImage = (event) => {
+    return new Promise( async (resolve, reject) => {
+      event.preventDefault();
+      console.log("uploading file....");
+      await firebase.storage()
+        .ref(`cover-images/${fileName + file.name}`)
+        .put(file)
+        .then((
+          (snapShot) => console.log(snapShot),
+          (err) => console.log(err),
+          () => {
+            firebase.storage()
+              .ref('cover-images')
+              .child(fileName + file.name)
+              .getDownloadURL()
+              .then((url) => {
+                setImageURL(url)
+                resolve(url)
+                console.log(bookDetails, "finished");
+              })
+          }))
+    })
+  }
+  const handleSubmit = () => {
+    storeImage().then((url) => {
+      console.log('start settting the bookd');
+      setBookDetails({...bookDetails,url:url});
+      console.log('book detadded');
+      console.logbook(bookDetails);
+    })
   }
 
   return (
