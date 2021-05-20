@@ -21,13 +21,13 @@ const Addbook = () => {
   const [bookDetails, setBookDetails] = useState({})
   const [fileName, setFileName] = useState(null)
   const [file, setFile] = useState(null);
-  const [imageURL,setImageURL] = useState(null)
+  const [imageURL, setImageURL] = useState(null)
   const userId = useSelector(state => state.essentials.userData.uid);
 
   const viewImage = (event) => {
     setFile(event.target.files[0]);
     var date = new Date();
-    setFileName(date.getTime() + "-" + date.getDate() + "-" + date.getFullYear() + "-" + date.getMonth() +"-"+ userId)
+    setFileName(date.getTime() + "-" + date.getDate() + "-" + date.getFullYear() + "-" + date.getMonth() + "-" + userId)
   }
 
   const handleInput = (event) => {
@@ -39,27 +39,25 @@ const Addbook = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(fileName);
-    console.log(file);
-    console.log(bookDetails)
+    console.log("uploading file....");
 
-    let uploadTask = await firebase.storage()
+    await firebase.storage()
       .ref(`cover-images/${fileName + file.name}`)
-      .put(file);
-
-    await uploadTask.On("state_changed",
-    (snapShot) => console.log(snapShot),
-    (err) => console.log(err),
-    ()=>{
-      firebase.storage()
-      .ref('cover-images')
-      .child(fileName)
-      .getDownloadURL()
-      .then((url) => {
-        setImageURL(url)
-      })
-    })
-    console.log(imageURL);
+      .put(file)
+      .then((
+        (snapShot) => console.log(snapShot),
+        (err) => console.log(err),
+        () => {
+          firebase.storage()
+            .ref('cover-images')
+            .child(fileName + file.name)
+            .getDownloadURL()
+            .then((url) => {
+              setImageURL(url)
+              console.log("finished");
+            })
+        }))
+      await console.log("url" , imageURL);
   }
 
   return (

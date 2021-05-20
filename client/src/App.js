@@ -10,6 +10,7 @@ import BookList from './Components/BookList/BookList'
 import Footer from './Components/Footer/Footer'
 import AddBook from './Components/AddBook/Addbook'
 import MobileFooter from './Components/MobileFooter/MobileFooter';
+import PreLoader from './Components/PreLoader/PreLoader';
 import instance from './Assets/server/instance';
 import Actions from './Assets/Essentials/EssentialAction'
 
@@ -19,16 +20,13 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(()=>{
-
-     async function checkUser(){
+    const checkUser = async()=>{
       const userData = await instance.get('/checkuser');
       console.log(userData.data)
       if(userData.data.status){
         dispatch(Actions.addUserData(userData.data.data))
       }
-  
     }
-    
     checkUser()
     
   },[])
@@ -53,6 +51,9 @@ function App() {
         </Route>
         <Route path="/booklist">
           <BookList/>
+        </Route>
+        <Route path="/loading">
+          <PreLoader/>
         </Route>
       </Switch>
       <Footer/>
