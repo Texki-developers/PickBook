@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import instance from '../../Assets/server/instance'
 import HeroBg from './HeroBg/HeroBg'
 import Homecards from './HomeCards/Homecards'
 const bookCover = [
@@ -28,6 +29,15 @@ const bookCover = [
     },
 ]
 const Home = () => {
+    const [homeBooks,setHomeBook] = useState({})
+    useEffect(() => {
+        const getHomeBooks = async() => {
+            const books = await instance.get('/');
+            setHomeBook(books.data)
+            console.log("books",books);
+        }
+        getHomeBooks();
+    }, [])
     return (
         <div>
             <HeroBg/>

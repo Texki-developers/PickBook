@@ -1,12 +1,13 @@
-import React, { useState } from 'react'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 import './AddBook.scss'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
-import { makeStyles, responsiveFontSizes } from '@material-ui/core/styles';
+import { makeStyles} from '@material-ui/core/styles';
 import firebase from '../../Assets/FirebaseConfig/firebaseConfig'
 import instance from '../../Assets/server/instance';
-import { red } from '@material-ui/core/colors';
 import NotLoggedIn from '../NotLoggedIn/NotLoggedIn';
+import Actions from '../../Assets/Essentials/EssentialAction';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
@@ -25,7 +26,19 @@ const Addbook = () => {
   const [fileName, setFileName] = useState(null)
   const [file, setFile] = useState(null);
   const essentials = useSelector(state => state.essentials);
+  const dispatch = useDispatch();
+  
+  useEffect(() => {
+    console.log("component will mount");
+    dispatch(Actions.addIconToggle());
+  }, [dispatch]);
 
+  useLayoutEffect(() => {
+    return () => {
+      dispatch(Actions.addIconToggle())
+    };
+  }, [dispatch])
+  
   const viewImage = (event) => {
     setFile(event.target.files[0]);
     var date = new Date();

@@ -29,14 +29,14 @@ function App() {
     }
     checkUser()
     
-  },[])
+  },[dispatch])
 
   return (
     <Router>
-      {filter.filter?<Filter/>:false}
+      {filter.filter?<Filter/>:null}
       <MobileFooter/>
-      <Header/>
-      <AddIcon/>
+      {filter.headAndFootShow?<Header/>:null}
+      {filter.addIcon?<AddIcon/>:null}
       <Switch>
         <Route path="/" exact>
           <Home/>
@@ -54,7 +54,7 @@ function App() {
           <PreLoader/>
         </Route>
       </Switch>
-      <Footer/>
+      {filter.headAndFootShow?<Footer/>:null}
     </Router>
   );
 }

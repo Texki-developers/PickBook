@@ -12,8 +12,9 @@ const MobileOptions = (props) => {
         const click = event.target.id;
         switch(click){
             case 'filter':
-                dispatch(Actions.toggleFilter());
                 dispatch(Actions.getEssentials())
+                dispatch(Actions.toggleFilter());
+                console.log('filter');
                 break;
             case '/add-book':
                 history.push('/add-book')

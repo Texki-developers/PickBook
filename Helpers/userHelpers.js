@@ -30,6 +30,18 @@ module.exports = {
                 resolve("Book uploading failed")
             })
         })
+    },
+    getNewUploadedBooks : () => {
+        return new Promise(async(resolve,reject) => {
+            const newUpdatedBooks = await db.get().collection(collection.BOOK_COLLECTION).find().sort({_id:-1}).limit(12).toArray()
+            resolve(newUpdatedBooks)
+        })
+    },
+    getMostViewedBooks : () => {
+        return new Promise(async(resolve,reject) => {
+            const mostViewedBooks = await db.get().collection(collection.BOOK_COLLECTION).find().limit(12).toArray();
+            resolve(mostViewedBooks);
+        })
     }
 
 }

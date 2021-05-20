@@ -1,6 +1,8 @@
 
 const essentials = {
         isLogin:false,
+        addIcon:true,
+        headAndFootShow:true,
         userData:null,
         filter:false,
         languages:["english","hindi","Tamil","urdu","malayalam"],
@@ -12,14 +14,16 @@ const essential = (state={...essentials},action) => {
         case 'GET_ESSENTIALS':
             state = essentials
             return state;
-
         case 'TOGGLE_FILTER':
             state = {...state,filter:!state.filter}
             return state;
 
         case 'ADD_USER_DATA':
-            var newState = {...state,userData:action.payload, isLogin:true};
-            return newState;
+            state = {...state,userData:action.payload, isLogin:true};
+            return state;
+        case 'ADD_ICON_TOGGLE':
+            state = {...state,addIcon:!state.addIcon,headAndFootShow:!state.headAndFootShow}
+            return state;
         default:
             return state;
     }

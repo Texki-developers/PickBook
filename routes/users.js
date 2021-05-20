@@ -1,8 +1,17 @@
 var express = require('express');
+const { getNewUploadedBooks } = require('../Helpers/userHelpers');
 var router = express.Router();
 var userHelpers = require('../Helpers/userHelpers')
 /* GET users listing. */
 router.get('/', function(req, res, next) {
+  userHelpers.getNewUploadedBooks()
+     .then(newUploadedBooks => {
+        userHelpers.getMostViewedBooks()
+          .then(mostViewedBooks => {
+            res.json({mostViewedBooks:mostViewedBooks,newUploadedBooks:newUploadedBooks});
+            console.log(mostViewedBooks);
+          })
+    })
   res.json({user:'user'});
 });
 
