@@ -9,6 +9,8 @@ import BookList from './Components/BookList/BookList'
 import Footer from './Components/Footer/Footer'
 import AddBook from './Components/AddBook/Addbook'
 import MobileFooter from './Components/MobileFooter/MobileFooter';
+import PreLoader from './Components/PreLoader/PreLoader';
+
 
 function App() {
   const filter = useSelector(state => state.essentials)
@@ -30,6 +32,9 @@ function App() {
         </Route>
         <Route path="/booklist">
           <BookList/>
+        </Route>
+        <Route path="/loading">
+          <PreLoader/>
         </Route>
       </Switch>
       <Footer/>
