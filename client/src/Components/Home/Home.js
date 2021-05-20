@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import resolve from 'resolve'
+import Actions from '../../Assets/Essentials/EssentialAction'
 import instance from '../../Assets/server/instance'
 import HeroBg from './HeroBg/HeroBg'
 import Homecards from './HomeCards/Homecards'
@@ -29,19 +32,27 @@ const bookCover = [
     },
 ]
 const Home = () => {
-    const [homeBooks,setHomeBook] = useState({})
+    const [homeBooks,setHomeBooks] = useState(null)
+    const dispatch = useDispatch();
+    const newBooks = null;
     useEffect(() => {
         const getHomeBooks = async() => {
-            const books = await instance.get('/');
-            setHomeBook(books.data)
-            console.log("books",books);
+            return new Promise((resolve,reject) => {
+                instance.get('/get-home-books').then(async(response) => {
+                    newBooks = response.data.newBooks
+                })
+            })
         }
-        getHomeBooks();
-    }, [])
+        getHomeBooks().then(()=>{
+            console.log("homeBook");
+        })
+    }, [dispatch])
+
+    console.log("home",newBooks);
     return (
         <div>
             <HeroBg/>
-            <Homecards bookCover={bookCover} heading='Newly Uploaded Books'/>
+            <Homecards bookCover={homeBooks}  heading='Newly Uploaded Books'/>
             <Homecards bookCover={bookCover} heading='Most Viewed Books'/>
         </div>
     )

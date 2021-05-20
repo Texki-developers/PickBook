@@ -6,7 +6,8 @@ const essentials = {
         userData:null,
         filter:false,
         languages:["english","hindi","Tamil","urdu","malayalam"],
-        genres:["fiction","children's","memoir","nonfiction","christian","cookbooks"]
+        genres:["fiction","children's","memoir","nonfiction","christian","cookbooks"],
+        loading:false
 }
 
 const essential = (state={...essentials},action) => {
@@ -23,6 +24,9 @@ const essential = (state={...essentials},action) => {
             return state;
         case 'ADD_ICON_TOGGLE':
             state = {...state,addIcon:!state.addIcon,headAndFootShow:!state.headAndFootShow}
+            return state;
+        case "TOGGLE_LOADING":
+            state = {...state,loading:!state.loading}
             return state;
         default:
             return state;

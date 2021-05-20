@@ -3,16 +3,11 @@ const { getNewUploadedBooks } = require('../Helpers/userHelpers');
 var router = express.Router();
 var userHelpers = require('../Helpers/userHelpers')
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+router.get('/get-home-books', function(req, res, next) {
   userHelpers.getNewUploadedBooks()
-     .then(newUploadedBooks => {
-        userHelpers.getMostViewedBooks()
-          .then(mostViewedBooks => {
-            res.json({mostViewedBooks:mostViewedBooks,newUploadedBooks:newUploadedBooks});
-            console.log(mostViewedBooks);
-          })
+     .then(newBooks => {
+        res.json({newBooks})
     })
-  res.json({user:'user'});
 });
 
 router.get('/checkuser',(req,res)=>{

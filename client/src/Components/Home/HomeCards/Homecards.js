@@ -2,13 +2,14 @@ import React from 'react'
 import BookCard from '../../BookCard/BookCard';
 import './HomeCards.scss'
 const Homecards = (props) => {
+    console.log(props.bookCover);
     return (
         <div className="home-cards">
             <h2>{props.heading}</h2>
             <div className="cards-slide">
                 {
                     props.bookCover.map((item,index) => (
-                        <BookCard key={index} coverImage={item.image}/>
+                        <BookCard key={index} id={item._id} coverImage={item.imageURL}/>
                     ))
                 }
             </div>

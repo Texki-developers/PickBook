@@ -14,6 +14,9 @@ const Actions = {
     }),
     addIconToggle : () => ({
         type:'ADD_ICON_TOGGLE'
+    }),
+    toggleLoading : () => ({
+        type: "TOGGLE_LOADING"
     })
 }
 

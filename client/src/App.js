@@ -37,6 +37,7 @@ function App() {
       <MobileFooter/>
       {filter.headAndFootShow?<Header/>:null}
       {filter.addIcon?<AddIcon/>:null}
+      {filter.loading?<PreLoader/>:null}
       <Switch>
         <Route path="/" exact>
           <Home/>
@@ -49,9 +50,6 @@ function App() {
         </Route>
         <Route path="/booklist">
           <BookList/>
-        </Route>
-        <Route path="/loading">
-          <PreLoader/>
         </Route>
       </Switch>
       {filter.headAndFootShow?<Footer/>:null}

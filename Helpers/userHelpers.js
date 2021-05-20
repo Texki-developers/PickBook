@@ -1,5 +1,6 @@
 const db = require('../config/mongodb')
 const collection = require('../config/collections')
+const collections = require('../config/collections')
 
 
 module.exports = {
@@ -33,14 +34,27 @@ module.exports = {
     },
     getNewUploadedBooks : () => {
         return new Promise(async(resolve,reject) => {
-            const newUpdatedBooks = await db.get().collection(collection.BOOK_COLLECTION).find().sort({_id:-1}).limit(12).toArray()
+            const newUpdatedBooks = await db.get().collection(collections.BOOK_COLLECTION).aggregate([
+                {
+                    $project:{
+                        imageURL:1
+                    }
+                }
+            ]).sort({_id:-1}).limit(12).toArray()
+            console.log(newUpdatedBooks)
             resolve(newUpdatedBooks)
         })
     },
     getMostViewedBooks : () => {
         return new Promise(async(resolve,reject) => {
-            const mostViewedBooks = await db.get().collection(collection.BOOK_COLLECTION).find().limit(12).toArray();
-            resolve(mostViewedBooks);
+            const mostViewedBooks = await db.get().collection(collections.BOOK_COLLECTION).aggregate([
+                {
+                    $project:{
+                        imageURL:1
+                    }
+                }
+            ]).limit(12).toArray()
+            resolve(mostViewedBooks)
         })
     }
 
