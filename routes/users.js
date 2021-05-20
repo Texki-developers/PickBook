@@ -15,6 +15,9 @@ router.get('/checkuser',(req,res)=>{
     res.json({status:false,data:null})
   }
 })
+router.post('/add-book',(req,res) => {
+    console.log(req.body);
+})
 
 
 router.post('/login',(req,res)=>{

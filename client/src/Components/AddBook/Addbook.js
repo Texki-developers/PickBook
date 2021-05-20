@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import firebase from '../../Assets/FirebaseConfig/firebaseConfig'
+import instance from '../../Assets/server/instance';
 const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
@@ -18,16 +19,15 @@ const useStyles = makeStyles((theme) => ({
 
 const Addbook = () => {
   const classes = useStyles();
-  const [bookDetails, setBookDetails] = useState({})
+  const [bookDetails, setBookDetails] = useState({userId:null,imageURL:null})
   const [fileName, setFileName] = useState(null)
   const [file, setFile] = useState(null);
-  const [imageURL, setImageURL] = useState(null)
   const userId = useSelector(state => state.essentials.userData.uid);
 
   const viewImage = (event) => {
     setFile(event.target.files[0]);
     var date = new Date();
-    setFileName(date.getTime() + "-" + date.getDate() + "-" + date.getFullYear() + "-" + date.getMonth() + "-" + userId)
+    setFileName(date.getTime() + "-" + date.getDate() + "-" + date.getFullYear() + "-" + date.getMonth() + "-")
   }
 
   const handleInput = (event) => {
@@ -37,9 +37,8 @@ const Addbook = () => {
     })
   };
 
-  const storeImage = (event) => {
+  const storeImage = () => {
     return new Promise( async (resolve, reject) => {
-      event.preventDefault();
       console.log("uploading file....");
       await firebase.storage()
         .ref(`cover-images/${fileName + file.name}`)
@@ -52,20 +51,24 @@ const Addbook = () => {
               .ref('cover-images')
               .child(fileName + file.name)
               .getDownloadURL()
-              .then((url) => {
-                setImageURL(url)
-                resolve(url)
+              .then(async(url) => {
+                await setBookDetails({...bookDetails,imageURL:url,userId:userId})
                 console.log(bookDetails, "finished");
               })
           }))
     })
   }
-  const handleSubmit = () => {
-    storeImage().then((url) => {
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    storeImage().then(async (bookDetails) => {
       console.log('start settting the bookd');
-      setBookDetails({...bookDetails,url:url});
-      console.log('book detadded');
-      console.logbook(bookDetails);
+      // await setBookDetails({...bookDetails,userId:url});
+      // console.log('book detadded');
+      console.log(bookDetails);
+      await instance.post('/add-book',url).then((res)=>{
+
+      })
     })
   }
 
