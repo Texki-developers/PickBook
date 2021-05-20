@@ -11,6 +11,15 @@ module.exports = {
                 resolve(res.ops[0])
             })
         })
+    },
+    addBook:(bookDetails) => {
+        return new Promise((resolve,reject) => {
+            db.get().collection(collection.BOOK_COLLECTION).insertOne(bookDetails).then(res=>{
+                resolve("Book uploaded successfully")
+            }).catch(err=>{
+                resolve("Book uploading failed")
+            })
+        })
     }
 
 }

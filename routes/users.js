@@ -17,6 +17,9 @@ router.get('/checkuser',(req,res)=>{
 })
 router.post('/add-book',(req,res) => {
     console.log(req.body);
+    userHelpers.addBook(req.body).then(statusMessage => {
+      res.json({status:statusMessage})
+    })
 })
 
 

@@ -2,9 +2,10 @@ import React, { useState } from 'react'
 import './AddBook.scss'
 import { useSelector } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, responsiveFontSizes } from '@material-ui/core/styles';
 import firebase from '../../Assets/FirebaseConfig/firebaseConfig'
 import instance from '../../Assets/server/instance';
+import { red } from '@material-ui/core/colors';
 const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
@@ -53,7 +54,8 @@ const Addbook = () => {
               .getDownloadURL()
               .then(async(url) => {
                 await setBookDetails({...bookDetails,imageURL:url,userId:userId})
-                console.log(bookDetails, "finished");
+                await resolve(bookDetails)
+
               })
           }))
     })
@@ -62,12 +64,8 @@ const Addbook = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     storeImage().then(async (bookDetails) => {
-      console.log('start settting the bookd');
-      // await setBookDetails({...bookDetails,userId:url});
-      // console.log('book detadded');
-      console.log(bookDetails);
-      await instance.post('/add-book',url).then((res)=>{
-
+      await instance.post('/add-book',bookDetails).then((res)=>{
+        console.log(res.data.status);
       })
     })
   }

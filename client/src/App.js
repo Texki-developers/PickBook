@@ -31,8 +31,6 @@ function App() {
     
   },[])
 
-
-
   return (
     <Router>
       {filter.filter?<Filter/>:false}
