@@ -20,10 +20,10 @@ const useStyles = makeStyles((theme) => ({
 
 const Addbook = () => {
   const classes = useStyles();
-  const [bookDetails, setBookDetails] = useState({userId:null,imageURL:null})
+  const [bookDetails, setBookDetails] = useState({})
   const [fileName, setFileName] = useState(null)
   const [file, setFile] = useState(null);
-  const userId = useSelector(state => state.essentials.userData.uid);
+  const essentials = useSelector(state => state.essentials);
 
   const viewImage = (event) => {
     setFile(event.target.files[0]);
@@ -52,9 +52,14 @@ const Addbook = () => {
               .ref('cover-images')
               .child(fileName + file.name)
               .getDownloadURL()
-              .then(async(url) => {
-                await setBookDetails({...bookDetails,imageURL:url,userId:userId})
-                await resolve(bookDetails)
+              .then((url) => {
+                const bookInfo = {
+                  ...bookDetails,
+                  imageURL:url,
+                  userId : essentials.userData.uid
+                }
+                console.log(bookInfo);
+                resolve(bookInfo)
 
               })
           }))
@@ -63,8 +68,8 @@ const Addbook = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    storeImage().then(async (bookDetails) => {
-      await instance.post('/add-book',bookDetails).then((res)=>{
+    storeImage().then((bookInfo) => {
+      instance.post('/add-book',bookInfo).then((res)=>{
         console.log(res.data.status);
       })
     })
