@@ -1,6 +1,7 @@
 const db = require('../config/mongodb')
 const collection = require('../config/collections')
-const collections = require('../config/collections')
+const ObjectId  = require('mongodb').ObjectId
+
 
 
 module.exports = {
@@ -34,7 +35,7 @@ module.exports = {
     },
     getNewUploadedBooks : () => {
         return new Promise(async(resolve,reject) => {
-            const newUpdatedBooks = await db.get().collection(collections.BOOK_COLLECTION).aggregate([
+            const newUpdatedBooks = await db.get().collection(collection.BOOK_COLLECTION).aggregate([
                 {
                     $project:{
                         imageURL:1
@@ -47,7 +48,7 @@ module.exports = {
     },
     getMostViewedBooks : () => {
         return new Promise(async(resolve,reject) => {
-            const mostViewedBooks = await db.get().collection(collections.BOOK_COLLECTION).aggregate([
+            const mostViewedBooks = await db.get().collection(collection.BOOK_COLLECTION).aggregate([
                 {
                     $project:{
                         imageURL:1
@@ -55,6 +56,25 @@ module.exports = {
                 }
             ]).limit(12).toArray()
             resolve(mostViewedBooks)
+        })
+    },
+    
+    getAllBook: ()=>{
+        return new Promise((resolve,reject)=>{
+            var data =  db.get().collection(collection.BOOK_COLLECTION).aggregate([{
+                $project:{
+                    imageURL:1
+                }
+            }]).toArray()
+            
+            resolve(data)
+        })
+    },
+
+    getOneBook:(id)=>{
+        return new Promise((resolve,reject)=>{
+            var data = db.get().collection(collection.BOOK_COLLECTION).find({_id:ObjectId(id)}).toArray()
+            resolve(data)
         })
     }
 
