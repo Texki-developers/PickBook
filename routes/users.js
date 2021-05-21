@@ -36,4 +36,17 @@ router.post('/login',(req,res)=>{
   })
 })
 
+router.get('/getallbooks',(req,res)=>{
+  userHelpers.getAllBook().then(data=>{
+    res.json(data)
+  })
+})
+
+router.get('/getonebook/:id',(req,res)=>{
+  console.log(req.params.id);
+  userHelpers.getOneBook(req.params.id).then(data=>{
+    res.json(data)
+  })
+})
+
 module.exports = router;
