@@ -1,4 +1,5 @@
 
+
 const essentials = {
         isLogin:false,
         addIcon:true,
@@ -25,9 +26,15 @@ const essential = (state={...essentials},action) => {
         case 'ADD_ICON_TOGGLE':
             state = {...state,addIcon:!state.addIcon,headAndFootShow:!state.headAndFootShow}
             return state;
+
         case "TOGGLE_LOADING":
             state = {...state,loading:!state.loading}
             return state;
+
+        case "LOG_OUT":
+            var afterLogout =   {...state,userData:null,isLogin:null}  
+            return afterLogout;
+
         default:
             return state;
     }
