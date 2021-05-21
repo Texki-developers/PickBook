@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import resolve from 'resolve'
-import Actions from '../../Assets/Essentials/EssentialAction'
 import instance from '../../Assets/server/instance'
 import HeroBg from './HeroBg/HeroBg'
 import Homecards from './HomeCards/Homecards'
@@ -34,7 +32,7 @@ const bookCover = [
 const Home = () => {
     const [homeBooks,setHomeBooks] = useState(null)
     const dispatch = useDispatch();
-    const newBooks = null;
+    var newBooks = null;
     useEffect(() => {
         const getHomeBooks = async() => {
             return new Promise((resolve,reject) => {

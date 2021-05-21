@@ -1,5 +1,5 @@
 import {useEffect} from 'react';
-import {BrowserRouter as Router,Switch,Route} from 'react-router-dom';
+import {BrowserRouter as Router,Switch,Route, useParams} from 'react-router-dom';
 import Home from './Components/Home/Home';
 import Header from './Components/Header/Header'
 import ViewBook from './Components/ViewBook/ViewBook'
@@ -45,7 +45,7 @@ function App() {
         <Route path="/add-book">
           <AddBook/>
         </Route>
-        <Route path="/book">
+        <Route path="/book/:id">
           <ViewBook/>
         </Route>
         <Route path="/booklist">
