@@ -1,0 +1,28 @@
+@import '../Variables/variables';
+.message-card{
+    position: fixed;
+    bottom: 10vh;
+    right: 1%;
+    padding: 2rem;
+    border-radius: 13px;
+    font-weight: 500;
+    background-color: black;
+    color: #fff;
+    transition: $transitionThree;
+    a{
+        text-decoration: none;
+        margin-top: 1rem;
+    }
+}
+.red{
+    background-color: #ff0000ad;
+}
+@media only screen and (max-width: 420px){
+    .message-card{
+        bottom: 10vh;
+        right: 1%;
+        padding: .5rem;
+        border-radius: 7px;
+        font-size: 0.7rem;
+    }
+}

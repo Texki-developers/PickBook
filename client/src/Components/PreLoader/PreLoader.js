@@ -3,7 +3,7 @@ import './PreLoader.scss'
 const PreLoader = () => {
     return (
         <div className="loading-container">
-            <h1 class="title">Loading</h1>
+            <h1 class="title">PICK<span>BOOKS</span></h1>
             <div class="rainbow-marker-loader"></div>
         </div>
     )

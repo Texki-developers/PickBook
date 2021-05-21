@@ -77,9 +77,15 @@
       align-items: center;
       flex-direction: column;
       background-color: $violet;
+      z-index: 1000;
       h1{
           color: #fff;
-      }
+          font-weight: 500;
+          font-family: $logo;
+          span{
+            font-weight: 700;
+          }
+        }
   }
   .rainbow-marker-loader {
 	height: 1rem;
