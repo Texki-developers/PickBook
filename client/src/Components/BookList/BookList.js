@@ -1,46 +1,30 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import './BookList.scss'
 import BookCard from '../BookCard/BookCard'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
-
+import instance from '../../Assets/server/instance'
 
 const BookList = ()=>{
+    const [bookList,setBookList] = useState([])
+    
+    useEffect(()=>{
 
-    const bookCover = [
-        {
-            image:'/book-cover/cover1.jpg'
-        },
-        {
-            image:'/book-cover/cover2.jpg'
-        },
-        {
-            image:'/book-cover/cover3.jpg'
-        },
-        {
-            image:'/book-cover/cover4.jpg'
-        },
-        {
-            image:'/book-cover/cover5.jpg'
-        },
-        {
-            image:'/book-cover/cover6.jpg'
-        },
-        {
-            image:'/book-cover/cover7.jpg'
-        },
-        {
-            image:'/book-cover/cover8.jpg'
-        },
-    ]
+        const getBooks = async ()=>{
+            var list = await instance.get('/getallbooks')
+            console.log(list.data);
 
+            setBookList(list.data)
+        }
+        getBooks()
+    },[])
 
     return (
         <div className='booklist_container'>
             <h1>Good Old Books</h1>
             <div className='booklist_list' >
-                {bookCover.map((d,i)=>(
-                    <BookCard coverImage={d.image} key={i}/>
+                {bookList.map((d,i)=>(
+                    <BookCard coverImage={d.imageURL} key={i} bookid={d._id}/>
                 ))} 
             </div>
 
