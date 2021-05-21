@@ -9,7 +9,7 @@ const Homecards = (props) => {
             <div className="cards-slide">
                 {
                     props.bookCover.map((item,index) => (
-                        <BookCard key={index} id={item._id} coverImage={item.imageURL}/>
+                        <BookCard key={index} bookId={item._id} coverImage={item.imageURL}/>
                     ))
                 }
             </div>

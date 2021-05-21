@@ -6,7 +6,14 @@ var userHelpers = require('../Helpers/userHelpers')
 router.get('/get-home-books', function(req, res, next) {
   userHelpers.getNewUploadedBooks()
      .then(newBooks => {
-        res.json({newBooks})
+       userHelpers.getMostViewedBooks()
+        .then(mostViewedBooks=>{
+          res.json(
+            {
+              newBooks:newBooks,
+              mostViewedBooks:mostViewedBooks
+            })
+       })
     })
 });
 
