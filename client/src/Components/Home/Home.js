@@ -47,7 +47,6 @@ const Home = () => {
             console.log("homeBook");
         })
     }, [dispatch])
-
     console.log("home",newBooks);
     return (
         <div>
