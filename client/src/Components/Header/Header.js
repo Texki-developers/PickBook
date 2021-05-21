@@ -18,17 +18,19 @@ function Header() {
         dispath(Actions.toggleFilter())
     }
 
-    const logout = ()=>{
+    const logout =async ()=>{
 
-         var bla = window.confirm('Do you want to LogOut?')
-         if(bla){
-            instance.get('/logout').then(res=>{
+         
+
+         if(window.confirm('Do you want to LogOut?')){
+            await instance.get('/logout').then(async res=>{
                 
                 if(res.status === 200){
-                    dispath(Actions.logout);
+                    await dispath(Actions.logout());
                     alert('You logout sucessfully')
                 }else{
                     alert('Somerthink went Worng!\nTry again later')
+                    
                 }
                 
             })

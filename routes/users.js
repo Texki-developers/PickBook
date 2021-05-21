@@ -58,6 +58,7 @@ router.get('/getonebook/:id',(req,res)=>{
 
 router.get('/logout',(req,res)=>{
   req.session.destroy()
+  res.json({status:true})
 })
 
 module.exports = router;

@@ -7,8 +7,7 @@ import Loding from '../PreLoader/PreLoader'
 import { useParams } from 'react-router';
 import instance from '../../Assets/server/instance'
 import Message from '../Message/Message';
-import { useSelector } from 'react-redux';
-import { BsLockFill } from 'react-icons/bs';
+import { useSelector } from 'react-redux';  
 import CommentField from './CommentField/CommentField';
 
 const ViewBook = () => {
@@ -125,6 +124,7 @@ const ViewBook = () => {
             <CommentCard {...d} key={i} />
           ))
         }
+        <button>Show More</button>
       </div>
   );
 }
