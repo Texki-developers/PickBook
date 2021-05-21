@@ -8,10 +8,10 @@ module.exports = {
 
     addUser:(data)=>{
         return new Promise(async(resolve,reject)=>{
-
             var user = await db.get().collection(collection.USER_COLLECTION).find({uid:data.uid}).toArray()
+            // console.log(user.length);
 
-            if(user.length===-1){
+            if(user.length===0){
                 db.get().collection(collection.USER_COLLECTION).insertOne(data).then(res=>{
                     resolve(res.ops[0])
                 })
@@ -42,7 +42,7 @@ module.exports = {
                     }
                 }
             ]).sort({_id:-1}).limit(12).toArray()
-            console.log(newUpdatedBooks)
+            // console.log(newUpdatedBooks)
             resolve(newUpdatedBooks)
         })
     },
