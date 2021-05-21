@@ -60,8 +60,8 @@ module.exports = {
     },
     
     getAllBook: ()=>{
-        return new Promise((resolve,reject)=>{
-            var data =  db.get().collection(collection.BOOK_COLLECTION).aggregate([{
+        return new Promise(async(resolve,reject)=>{
+            var data =  await db.get().collection(collection.BOOK_COLLECTION).aggregate([{
                 $project:{
                     imageURL:1
                 }

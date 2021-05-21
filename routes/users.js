@@ -27,7 +27,7 @@ router.get('/checkuser',(req,res)=>{
   }
 })
 router.post('/add-book',(req,res) => {
-    console.log(req.body);
+    // console.log(req.body);
     userHelpers.addBook(req.body).then(statusMessage => {
       res.json({status:statusMessage})
     })
@@ -50,7 +50,7 @@ router.get('/getallbooks',(req,res)=>{
 })
 
 router.get('/getonebook/:id',(req,res)=>{
-  console.log(req.params.id);
+  // console.log(req.params.id);
   userHelpers.getOneBook(req.params.id).then(data=>{
     res.json(data)
   })
