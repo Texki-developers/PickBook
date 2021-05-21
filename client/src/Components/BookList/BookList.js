@@ -12,10 +12,14 @@ const BookList = ()=>{
     useEffect(()=>{
 
         const getBooks = async ()=>{
-            var list = await instance.get('/getallbooks')
-            console.log(list.data);
-            setBookList(list.data)
-            setLoading(false)
+            await instance.get('/getallbooks').then(async res=>{
+                if(res.status === 200){
+                    await setBookList(res.data)
+                    await setLoading(false)
+                }else{
+                    await getBooks()
+                }
+            })
         }
         getBooks()
     },[])

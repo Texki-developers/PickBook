@@ -9,14 +9,19 @@ import instance from '../../Assets/server/instance'
 
 const ViewBook = () => {
   var {id} = useParams();
-  var [loading,setLoding] = useState(true)
+  var [loading,setLoading] = useState(true)
   var [details,SetDetails] = useState({})
   
   useEffect(()=>{
     const getBook = async ()=>{
       await instance.get(`/getonebook/${id}`).then(async res=>{
-        await SetDetails(res.data[0])
-        await setLoding(false)
+        if(res.status === 200){
+          // console.log(res);
+          await SetDetails(res.data[0])
+          await setLoading(false)
+      }else{
+         await getBook()
+      }
       })
       
     }
