@@ -28,6 +28,12 @@
             color: white;
             border-radius: 3px;
         }
+
+        p.active{
+            background-color: white;
+            color: $violet;
+            border: 0.5px solid $violet;
+        }
         
         .MuiSvgIcon-root{
             color: $violet;

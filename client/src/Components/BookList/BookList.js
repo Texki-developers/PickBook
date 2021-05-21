@@ -9,6 +9,11 @@ import Loading from '../PreLoader/PreLoader'
 const BookList = ()=>{
     const [bookList,setBookList] = useState([])
     const [loding,setLoading] = useState(true)
+    const [currentPage,setCurrentPage] = useState(3);
+    const [postPerPage,setPostPerPage] = useState(8);
+
+
+
     useEffect(()=>{
 
         const getBooks = async ()=>{
@@ -24,25 +29,40 @@ const BookList = ()=>{
         getBooks()
     },[])
 
+    const navigate = num=>{
+        if(currentPage===1 && num===-1 || currentPage===totalPage && num===1){
+            alert('No more pages!')
+        }else{
+            setCurrentPage(currentPage+num)
+        }
+    }
+
+    const totalPage = Math.floor(bookList.length/postPerPage+1) 
+    const indexOfLastPost = currentPage*postPerPage;
+    const indexOfFirstPost = indexOfLastPost-postPerPage;
+    const currentPosts = bookList.slice(indexOfFirstPost,indexOfLastPost);
+
     return (
         loding?<Loading/>:
 
         <div className='booklist_container'>
             <h1>Good Old Books</h1>
             <div className='booklist_list' >
-                {bookList.map((d,i)=>(
-                    <BookCard coverImage={d.imageURL} key={i} bookid={d._id}/>
+                {currentPosts.map((d,i)=>(
+                    <BookCard coverImage={d.imageURL} key={i} bookId={d._id}/>
                 ))} 
             </div>
 
             <div className="pagination">
-                <ArrowBackIosIcon/>
-                <p>1</p>
-                <p>2</p>
-                <p>3</p>
-                <p>4</p>
-                <p>5</p>
-                <ArrowForwardIosIcon/>
+                <ArrowBackIosIcon onClick={()=>navigate(-1)}/>
+                {Array.from(Array(totalPage),(e,i)=>{
+                    if(i+1===currentPage){
+                        return <p className='active'>{i+1}</p>
+                    }else{
+                       return <p onClick={()=>setCurrentPage(i+1)}>{i+1}</p>
+                    }
+                })}
+                <ArrowForwardIosIcon onClick={()=>navigate(1)}/>
             </div>
         </div>
     )
