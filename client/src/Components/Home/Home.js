@@ -11,12 +11,19 @@ const Home = () => {
     useEffect(() => {
         const getHomeBooks = async () => {
             instance.get('/get-home-books').then(async (response) => {
-                await setHomeBooks(
-                    {
-                        newBooks:response.data.newBooks,
-                        mostViewedBooks: response.data.mostViewedBooks
-                    });
-                setLoading(false)
+                console.log("response",response);
+                console.log(homeBooks);
+                if(response.status == 200){
+                    await setHomeBooks(
+                        {
+                            newBooks:response.data.newBooks,
+                            mostViewedBooks: response.data.mostViewedBooks
+                        });
+                    setLoading(false)
+                }else{
+                    getHomeBooks();
+                    console.log("no data;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;");
+                }
             })
         }
         getHomeBooks();

@@ -11,12 +11,15 @@ import { useSelector } from 'react-redux';
 import { BsLockFill } from 'react-icons/bs';
 import CommentField from './CommentField/CommentField';
 
+
 const ViewBook = () => {
   var { id } = useParams();
   var [loading, setLoading] = useState(true)
   var [details, SetDetails] = useState({})
-  const [isMessage,setIsMessage] = useState(false)
-  const [isCommentInput,setIsCommentInput] = useState(false)
+  const [isMessage, setIsMessage] = useState(false)
+  const [isCommentInput, setIsCommentInput] = useState(false)
+  const [reviews, setReviews] = useState(false)
+
   const essentials = useSelector(state => state.essentials)
 
   useEffect(() => {
@@ -30,22 +33,27 @@ const ViewBook = () => {
           await getBook()
         }
       })
-
     }
-
-    getBook()
+    const getReviews = () => {
+      instance.get(`/reviews/${id}`).then(async res => {
+        console.log(res);
+        setReviews(res.data)
+      })
+    }
+    getBook();
+    getReviews();
   }, [])
 
   const handleReview = (event) => {
     event.preventDefault();
-    if(essentials.userData){
+    if (essentials.userData) {
       setIsCommentInput(!isCommentInput);
-    }else{
+    } else {
       console.log("message");
       setIsMessage(true)
-      setTimeout(()=>{
+      setTimeout(() => {
         setIsMessage(false)
-      },3000)
+      }, 3000)
     }
   }
 
@@ -80,7 +88,7 @@ const ViewBook = () => {
     loading ? <Loding /> :
 
       <div className="viewbook_container">
-        {isMessage && <Message message="Please login to write review" link="/" linkText="Click here to login" color="red"/>}
+        {isMessage && <Message message="Please login to write review" link="/" linkText="Click here to login" color="red" />}
         <div className="book_container">
           <img
             src={details.imageURL}
@@ -117,14 +125,19 @@ const ViewBook = () => {
             <p>5/5 | Rating:4599 |Reviews:3683 </p>
           </div>
           <button onClick={handleReview}>Write your Review</button>
-          {isCommentInput && <CommentField/>}
+          {isCommentInput && <CommentField book={id} />}
         </div>
         <hr />
-        {
-          comments.map((d, i) => (
-            <CommentCard {...d} key={i} />
-          ))
+        {reviews &&
+          <>
+            {
+              reviews.map((data, i) => (
+                <CommentCard {...data} key={i} />
+              ))
+            }
+          </>
         }
+
       </div>
   );
 }

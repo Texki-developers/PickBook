@@ -10,11 +10,25 @@
         padding: 7px;
         font-weight: 500;
         outline: none;
+        font-size: 1rem;
     }
     button{
         color: #fff !important;
         padding: 0.5rem 1rem !important;
         font-weight: 700;
         border-radius: 2px;
+        background-color: #1dbb00 !important;
+        transition: all 0.2s ease-in-out;
+        &:hover{
+            background-color: #168d01 !important;
+        }
+    }
+}
+@media only screen and (max-width: 420px){
+    .comment-field{
+        .comment-input{
+            font-size: 0.9rem;
+        }
+
     }
 }

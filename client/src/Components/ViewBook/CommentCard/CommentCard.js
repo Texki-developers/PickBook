@@ -36,20 +36,20 @@ function CommentCard(props) {
       <div className="comment_container">
         <div id="user_name">
           <img
-            src={props.image}
+            src={props.userData[0].photo}
             alt=""
           />
-          <p>{props.name}</p>
+          <p>{props.userData[0].name}</p>
         </div>
         <p>
-          {props.comment}
+          {props.review}
         </p>
         <div id="like_container">
             <div className="like_up">
-              {liked?<ThumbUpIcon onClick={like}/>:<ThumbUpAltOutlinedIcon onClick={like}/>}<span>{props.like}</span>
+              {liked?<ThumbUpIcon onClick={() => like(props._id)}/>:<ThumbUpAltOutlinedIcon onClick={()=>like(props._id)}/>}<span>{props.like}</span>
             </div>
             <div className="like_down">
-              {unliked?<ThumbDownIcon onClick={unlike}/>:<ThumbDownAltOutlinedIcon onClick={unlike}/>}<span>{props.unlike}</span>
+              {unliked?<ThumbDownIcon onClick={() => unlike(props._id)}/>:<ThumbDownAltOutlinedIcon onClick={() => unlike(props._id)}/>}<span>{props.unlike}</span>
             </div>
         </div>
         <hr />
