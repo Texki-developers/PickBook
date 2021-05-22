@@ -76,9 +76,9 @@ router.post('/add-comment',(req,res) => {
   userHelpers.addReview(req.body).then((message)=>{
     res.json({message})
   })
+})
 router.get('/logout',(req,res)=>{
   req.session.destroy()
   res.json({status:true})
 })
-
 module.exports = router;

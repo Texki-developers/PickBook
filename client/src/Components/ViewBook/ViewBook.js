@@ -131,7 +131,13 @@ const ViewBook = () => {
           <>
             {
               reviews.map((data, i) => (
-                <CommentCard {...data} key={i} />
+                <>
+                  {data[0] ?
+                  <CommentCard {...data} key={i} />
+                :
+                  <h5>No comments yet</h5>}
+                  
+                </>
               ))
             }
           </>

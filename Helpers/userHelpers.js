@@ -7,15 +7,6 @@ const { response } = require('express')
 
 module.exports = {
 
-<<<<<<< HEAD
-    addUser: (data) => {
-        return new Promise(async (resolve, reject) => {
-
-            var user = await db.get().collection(collection.USER_COLLECTION).find({ uid: data.uid }).toArray()
-
-            if (user.length === -1) {
-                db.get().collection(collection.USER_COLLECTION).insertOne(data).then(res => {
-=======
     addUser:(data)=>{
         return new Promise(async(resolve,reject)=>{
             var user = await db.get().collection(collection.USER_COLLECTION).find({uid:data.uid}).toArray()
@@ -23,7 +14,6 @@ module.exports = {
 
             if(user.length===0){
                 db.get().collection(collection.USER_COLLECTION).insertOne(data).then(res=>{
->>>>>>> 68d0fce4a6321875eb5c65c0e8fa46122e494d62
                     resolve(res.ops[0])
                 })
 
@@ -52,13 +42,8 @@ module.exports = {
                         imageURL: 1
                     }
                 }
-<<<<<<< HEAD
-            ]).sort({ _id: -1 }).limit(12).toArray()
-            console.log(newUpdatedBooks)
-=======
             ]).sort({_id:-1}).limit(12).toArray()
             // console.log(newUpdatedBooks)
->>>>>>> 68d0fce4a6321875eb5c65c0e8fa46122e494d62
             resolve(newUpdatedBooks)
         })
     },
