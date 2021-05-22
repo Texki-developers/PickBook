@@ -10,7 +10,7 @@ router.get('/get-home-books', function(req, res, next) {
      .then(newBooks => {
        userHelpers.getMostViewedBooks()
         .then(mostViewedBooks=>{
-          console.log(newBooks,"newBooks");
+          // console.log(newBooks,"newBooks");
           res.json(
             {
               newBooks:newBooks,
@@ -18,7 +18,7 @@ router.get('/get-home-books', function(req, res, next) {
             })
        }).catch(err =>{
         res.json({status:false})
-        console.log(err);
+        // console.log(err);
       })
     })
 });
@@ -106,4 +106,13 @@ router.post('/filter',(req,res)=>{
     res.json(data)
   })
 })
+
+router.post('/search',(req,res)=>{
+  // console.log(req.body);
+  userHelpers.searchData(req.body).then(data=>{
+    // console.log(data);
+    res.json(data)
+  })
+})
+
 module.exports = router;

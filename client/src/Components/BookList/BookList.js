@@ -19,7 +19,20 @@ const BookList = ()=>{
 
         const getBooks = async ()=>{
             
-            if(filter.isFilter){
+           if(filter.isSearch){
+
+             await instance.post('search',{text:filter.searchText}).then(async res=>{
+                if(res.status===200){
+                    await setBookList(res.data)
+                    await setLoading(false)
+                    // console.log(bookList);
+                }else{
+                    await getBooks();
+                }
+             })   
+
+
+           }else if(filter.isFilter){
                 await instance.post('/filter',filter.filterData).then(async res=>{
                     if(res.status===200){
                         await setBookList(res.data)
