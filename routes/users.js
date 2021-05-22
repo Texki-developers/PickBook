@@ -65,6 +65,7 @@ router.get('/getonebook/:id',(req,res)=>{
 router.get('/reviews/:id',(req,res) => {
   userHelpers.getReviews(req.params.id).then((reviews) => {
     userHelpers.getReviewsCount(req.params.id).then((count)=>{
+      console.log(reviews);
       res.json({reviews:reviews,reviewCount:count})
     })
   }).catch((err) => {
@@ -85,14 +86,6 @@ router.post('/like-or-dislike',(req,res) => {
   })
 
 })
-
-router.get('/get-like-and-dislikes-count/:commentId',(req,res) => {
-  userHelpers.getLikeAndDislikeCount(req.params.commentId).then((response)=>{
-    console.log(response);
-    res.json(response)
-  })
-})
-
 
 router.get('/logout',(req,res)=>{
   req.session.destroy()
