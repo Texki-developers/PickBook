@@ -7,29 +7,16 @@ import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 import instance from '../../../Assets/server/instance';
 import { useSelector } from 'react-redux';
 import Message from '../../Message/Message';
+import { useParams } from 'react-router-dom';
 
 
 function CommentCard(props) {
-
+  const {id} = useParams();
   const [liked,setLiked] = useState(false)
   const [unliked,setUnliked] = useState(false)
   const [message,SetMessage] = useState(false)
   const [commId,setCommId] = useState(props._id)
   const essentials = useSelector(state => state.essentials)
-
-  useEffect(() => {
-    const getLikesAndDislIkeCount = () =>{
-      instance.get('/get-like-and-dislikes-count/'+commId).then((response)=>{
-        if(response.status ===200){
-          console.log(commId,"=========",response.data);
-        }else{
-          getLikesAndDislIkeCount()
-        }
-        
-      })
-    }
-    getLikesAndDislIkeCount();
-  }, [])
 
   const like = (commentId,condition)=>{
     handleLike(commentId,condition);
@@ -83,7 +70,7 @@ function CommentCard(props) {
         </p>
         <div id="like_container">
             <div className="like_up">
-              {liked?<ThumbUpIcon onClick={() => like(props._id,"like")}/>:<ThumbUpAltOutlinedIcon onClick={()=>like(props._id,"like")}/>}<span>{props.like}</span>
+              {liked?<ThumbUpIcon onClick={() => like(props._id,"like")}/>:<ThumbUpAltOutlinedIcon onClick={()=>like(props._id,"like")}/>}<span>{props.userData[0].likes}</span>
             </div>
             <div className="like_down">
               {unliked?<ThumbDownIcon onClick={() => unlike(props._id,"disLike")}/>:<ThumbDownAltOutlinedIcon onClick={() => unlike(props._id,"disLike")}/>}<span>{props.unlike}</span>

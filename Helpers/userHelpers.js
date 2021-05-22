@@ -111,84 +111,149 @@ module.exports = {
                     $project:{
                         userData:{photo:1,name:1},
                         reviewer:1,
-                        review:1
+                        review:1,
+                        likes:1,
+                        disLikes:1
                       }
                 }
             ]).toArray()
             resolve(reviews);
         })
     },
-
     getReviewsCount : (bookId) => {
         return new Promise(async(resolve,reject) =>{
             const reviewCount = await db.get().collection(collection.REVIEW_COLLECTION).count({bookId:bookId})
             resolve(reviewCount)
         })
     },
+    likeReview : (reviewDetails) =>{
+        return new Promise(async(resolve,reject) =>{
 
-    likeReview : (reviewDetials) => {
-        return new Promise(async(resolve,reject) => {
-            const likeData = {
-                commentId : reviewDetials.commentId,
-                userId: reviewDetials.userId
-            }
-
-            const isLiked = await db.get().collection(collection.REVIEW_LIKES_COLLECTION).findOne({userId:reviewDetials.userId,commentId:reviewDetials.commentId})
-            const isDisLiked = await db.get().collection(collection.REVIEW_DISLIKES_COLLECTION).findOne({userId:reviewDetials.userId,commentId:reviewDetials.commentId})
-
-            if(reviewDetials.condition === "like"){
-                if(isLiked){
-
-                    db.get().collection(collection.REVIEW_LIKES_COLLECTION)
-                    .removeOne({userId:reviewDetials.userId,commentId:reviewDetials.commentId})
-                    .then(() =>{
-                        resolve(true)
-                    })
+            const commentId = reviewDetails.commentId
+            const userId = reviewDetails.userId
             
-                
-                }else if(isDisLiked){
-                    db.get().collection(collection.REVIEW_DISLIKES_COLLECTION).removeOne({userId:reviewDetials.userId,commentId:reviewDetials.commentId})
-                    .then(()=>{
-                        db.get().collection(collection.REVIEW_LIKES_COLLECTION).insertOne(likeData).then((data) => {
-                            resolve("liked and remove dislike")
+            const isLiked = await db.get().collection(collection.REVIEW_COLLECTION).findOne(
+                {
+                    _id:ObjectId(commentId),
+                    likes:{uid:userId}
+                })
+            const isDisLiked = await db.get().collection(collection.REVIEW_COLLECTION).findOne(
+                {
+                    _id:ObjectId(commentId),
+                    disLikes:{uid:userId}
+                })
+            console.log("isLiked = ",isLiked);
+            
+            if(reviewDetails.condition === 'like'){
+                if(isLiked != null){
+                    db.get().collection(collection.REVIEW_COLLECTION).updateOne(
+                        {
+                            _id:ObjectId(commentId)
+                        },
+                        {
+                            $pull:{
+                                likes:{uid:userId}
+                            }
+                        }
+                        ).then(()=>{
+                            console.log("value pulled");
+                            resolve("liked")
                         })
-                    })
-                }
-                else{
-                    db.get().collection(collection.REVIEW_LIKES_COLLECTION).insertOne(likeData).then(() => {
-                        resolve(true)
-                    })
+                }else if(isDisLiked != null){
+                    db.get().collection(collection.REVIEW_COLLECTION).updateOne(
+                        {
+                            _id:ObjectId(commentId)
+                        },
+                        {
+                            $pull:{
+                                disLikes:{uid:userId}
+                            }
+                        }
+                        ).then(()=>{
+                            db.get().collection(collection.REVIEW_COLLECTION).updateOne(
+                                {
+                                    _id:ObjectId(commentId)
+                                },
+                                {
+                                    $push:{
+                                        likes:{uid:userId}
+                                    }
+                                }
+                                ).then(()=>{
+                                    console.log("dislike remove and like");
+                                    resolve("liked")
+                             })
+                     })
+                }else{
+                    db.get().collection(collection.REVIEW_COLLECTION).updateOne(
+                        {
+                            _id:ObjectId(commentId)
+                        },
+                        {
+                            $push:{
+                                likes:{uid:userId}
+                            }
+                        }
+                        ).then(()=>{
+                            resolve("liked")
+                     })
                 }
             }else{
-                if(isDisLiked){
-                    db.get().collection(collection.REVIEW_DISLIKES_COLLECTION)
-                    .removeOne({userId:reviewDetials.userId,commentId:reviewDetials.commentId})
-                    .then(() =>{
-                        resolve(true)
-                    })
-                }else if(isLiked){
-                    db.get().collection(collection.REVIEW_LIKES_COLLECTION)
-                    .removeOne({userId:reviewDetials.userId,commentId:reviewDetials.commentId})
-                    .then(() =>{
-                        db.get().collection(collection.REVIEW_DISLIKES_COLLECTION).insertOne({userId:reviewDetials.userId,commentId:reviewDetials.commentId})
-                        .then(()=>{
-                            resolve(true)
+                if(isDisLiked != null){
+                    db.get().collection(collection.REVIEW_COLLECTION).updateOne(
+                        {
+                            _id:ObjectId(commentId)
+                        },
+                        {
+                            $pull:{
+                                disLikes:{uid:userId}
+                            }
+                        }
+                        ).then(()=>{
+                            console.log("value dislike pulled");
+                            resolve("liked")
                         })
-                    })
+                }else if(isLiked != null){
+                    db.get().collection(collection.REVIEW_COLLECTION).updateOne(
+                        {
+                            _id:ObjectId(commentId)
+                        },
+                        {
+                            $pull:{
+                                likes:{uid:userId}
+                            }
+                        }
+                        ).then(()=>{
+                            db.get().collection(collection.REVIEW_COLLECTION).updateOne(
+                                {
+                                    _id:ObjectId(commentId)
+                                },
+                                {
+                                    $push:{
+                                        disLikes:{uid:userId}
+                                    }
+                                }
+                                ).then(()=>{
+                                    console.log("like remove and dislike");
+                                    resolve("liked")
+                             })
+                     })
                 }else{
-                    db.get().collection(collection.REVIEW_DISLIKES_COLLECTION).insertOne({userId:reviewDetials.userId,commentId:reviewDetials.commentId})
-                        .then(()=>{
-                            resolve(true)
-                        })
+                    db.get().collection(collection.REVIEW_COLLECTION).updateOne(
+                        {
+                            _id:ObjectId(commentId)
+                        },
+                        {
+                            $push:{
+                                disLikes:{uid:userId}
+                            }
+                        }
+                        ).then(()=>{
+                            console.log("disLiked");
+                            resolve("liked")
+                     })
                 }
             }
-        })
-    },
-    getLikeAndDislikeCount : (commentId) => {
-        return new Promise(async(resolve,reject) =>{
-            const likesCount = await db.get().collection(collection.REVIEW_LIKES_COLLECTION).count({commentId:commentId});
-            const disLikesCount = await db.get().collection(collection.REVIEW_DISLIKES_COLLECTION).count({commentId:commentId});
-            resolve({likesCount,disLikesCount});
         })
     },
     filterdata:(data)=>{
@@ -206,11 +271,4 @@ module.exports = {
         })
     }
 
-
-
 }
-
-
-
-
-
