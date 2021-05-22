@@ -23,9 +23,14 @@ function Header() {
         dispath(Actions.toggleFilter())
     }
 
+    const reset = ()=>{
+        setSearch('')
+        setSuggestions([])
+    }
 
     const searchClick = async()=>{
         await dispath(FilterAction.searchData(search))
+        reset()
         history.push('booklist')
     }
 
@@ -33,7 +38,6 @@ function Header() {
         setSearch(val);
 
         await instance.post('/search',{text:search}).then(async res=>{
-            
                 await setSuggestions(res.data)
                 await console.log(res);
             
@@ -73,7 +77,7 @@ function Header() {
                     onChange={e=>searchHandle(e.target.value)}
                     list='search_suggestions'
                     />
-                    <Suggetions dataList={suggesions}/>
+                    <Suggetions dataList={suggesions} reset={()=>reset()}/>
                 </div>
                 <SearchIcon onClick={()=>searchClick()}/>
             </div>
