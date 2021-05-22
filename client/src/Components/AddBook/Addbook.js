@@ -110,8 +110,8 @@ const Addbook = () => {
             <TextField className="inputs" label="Link to purchase" required name='link' onChange={handleInput} />
           </div>
           <div className="inputs-container">
-            <TextField className="input_cent" label="Language" required name='language' onChange={handleInput} />
-            <TextField className="input_cent" label="Genre" required name='genre' onChange={handleInput} />
+            <TextField className="input_cent" label="Language" required name='Language' onChange={handleInput} />
+            <TextField className="input_cent" label="Genre" required name='Genres' onChange={handleInput} />
             <TextField className="input_cent" label="Year of Publication" required name='year' onChange={handleInput} />
   
           </div >

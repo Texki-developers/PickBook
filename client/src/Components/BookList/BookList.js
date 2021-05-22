@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import './BookList.scss'
 import BookCard from '../BookCard/BookCard'
+import {useSelector} from 'react-redux'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import instance from '../../Assets/server/instance'
@@ -9,29 +10,51 @@ import Loading from '../PreLoader/PreLoader'
 const BookList = ()=>{
     const [bookList,setBookList] = useState([])
     const [loding,setLoading] = useState(true)
-    const [currentPage,setCurrentPage] = useState(3);
-    const [postPerPage,setPostPerPage] = useState(8);
-
+    const [currentPage,setCurrentPage] = useState(1);
+    const postPerPage = 8;
+    const filter = useSelector(state=>state.filter)
 
 
     useEffect(()=>{
 
         const getBooks = async ()=>{
-            await instance.get('/getallbooks').then(async res=>{
-                if(res.status === 200){
-                    await setBookList(res.data)
-                    await setLoading(false)
-                }else{
-                    await getBooks()
-                }
-            })
+            
+            if(filter.isFilter){
+                await instance.post('/filter',filter.filterData).then(async res=>{
+                    if(res.status===200){
+                        await setBookList(res.data)
+                        await setLoading(false)
+                        console.log(bookList);
+                    }else{
+                        await getBooks();
+                    }
+                })
+
+            }else{
+
+                await instance.get('/getallbooks').then(async res=>{
+                    if(res.status === 200){
+                        await setBookList(res.data)
+                        await setLoading(false)
+                    }else{
+                        await getBooks()
+                    }
+                })
+                
+            }
+            
+            
         }
+        console.log(filter);
         getBooks()
-    },[])
+    },[filter])
 
     const navigate = num=>{
-        if(currentPage===1 && num===-1 || currentPage===totalPage && num===1){
-            alert('No more pages!')
+        console.log(bookList);
+        if(currentPage===1 && num===-1){
+            alert('Its the first page!')
+        }else if(currentPage===totalPage && num===1){
+            alert('its the last page')
         }else{
             setCurrentPage(currentPage+num)
         }

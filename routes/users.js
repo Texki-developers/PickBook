@@ -68,7 +68,7 @@ router.get('/reviews/:id',(req,res) => {
       res.json({reviews:reviews,reviewCount:count})
     })
   }).catch((err) => {
-    console.log(err);
+    console.log("some errro",err);
   })
 })
 
@@ -97,5 +97,13 @@ router.get('/get-like-and-dislikes-count/:commentId',(req,res) => {
 router.get('/logout',(req,res)=>{
   req.session.destroy()
   res.json({status:true})
+})
+
+router.post('/filter',(req,res)=>{
+  // console.log(req.body);
+  userHelpers.filterdata(req.body).then(data=>{
+    // console.log(data);
+    res.json(data)
+  })
 })
 module.exports = router;

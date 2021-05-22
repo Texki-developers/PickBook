@@ -15,13 +15,15 @@ const LanguageFilter = (props) => {
             </header>
             {props.year ? (
                 <div className={drop ? "filter-option" : "filter-option filter-option-close"}>
-                    <YearSelector />
+                    <YearSelector setdata={data=>{props.setdata(data)}}/>
                 </div>
             )
                 : (
                     <div className={drop ? "filter-option" : "filter-option filter-option-close"}>
                         {props.item.map((item, index) => (
-                            <FilterButton key={index} children={item} title={props.title}/>
+                            <FilterButton key={index} 
+                            setdata={data=>{props.setdata(data)}} 
+                            children={item} title={props.title}/>
                         ))}
                     </div>
                 )}

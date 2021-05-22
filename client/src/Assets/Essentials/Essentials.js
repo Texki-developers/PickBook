@@ -6,8 +6,8 @@ const essentials = {
         headAndFootShow:true,
         userData:null,
         filter:false,
-        languages:["english","hindi","Tamil","urdu","malayalam"],
-        genres:["fiction","children's","memoir","nonfiction","christian","cookbooks"],
+        languages:["English","Hindi","Tamil","Urdu","Malayalam"],
+        genres:["fiction","children's","Gaming","Programming","christian","cookbooks"],
         loading:false
 }
 
