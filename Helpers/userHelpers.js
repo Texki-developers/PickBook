@@ -116,6 +116,21 @@ module.exports = {
             ]).toArray()
             resolve(reviews);
         })
+    },
+
+    filterdata:(data)=>{
+        return new Promise(async(resolve,reject)=>{
+            var details = await db.get().collection(collection.BOOK_COLLECTION).aggregate([
+                {
+                    $match:data
+                },{
+                    $project:{
+                        imageURL:1
+                    }
+                }
+            ]).toArray()
+            resolve(details)
+        })
     }
 
 

@@ -67,7 +67,7 @@ router.get('/reviews/:id',(req,res) => {
     console.log("reviews",reviews);
     res.json(reviews);
   }).catch((err) => {
-    console.log("some errro ;;;;;;;;;;;;;;;;;;;;",err);
+    console.log("some errro",err);
   })
 })
 
@@ -80,5 +80,13 @@ router.post('/add-comment',(req,res) => {
 router.get('/logout',(req,res)=>{
   req.session.destroy()
   res.json({status:true})
+})
+
+router.post('/filter',(req,res)=>{
+  // console.log(req.body);
+  userHelpers.filterdata(req.body).then(data=>{
+    // console.log(data);
+    res.json(data)
+  })
 })
 module.exports = router;
