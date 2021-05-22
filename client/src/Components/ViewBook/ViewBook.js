@@ -18,6 +18,7 @@ const ViewBook = () => {
   const [isMessage, setIsMessage] = useState(false)
   const [isCommentInput, setIsCommentInput] = useState(false)
   const [reviews, setReviews] = useState(false)
+  const [isReview,setIsReview] = useState(false)
 
   const essentials = useSelector(state => state.essentials)
 
@@ -35,8 +36,15 @@ const ViewBook = () => {
     }
     const getReviews = () => {
       instance.get(`/reviews/${id}`).then(async res => {
-        console.log(res);
+        console.log(res.data);
         setReviews(res.data)
+        if(res.data.reviewCount != 0){
+          setIsReview(true)
+          console.log("false");
+        }else{
+          setIsReview(false)
+          console.log(true);
+        }
       })
     }
     getBook();
@@ -55,33 +63,6 @@ const ViewBook = () => {
       }, 3000)
     }
   }
-
-  const comments = [
-    {
-      name: 'Amshen Yesudas',
-      image: 'https://avatars.githubusercontent.com/u/65121810?v=4',
-      like: '5678',
-      unlike: '124',
-      comment: "Nick's been feeling the same, but he's got a lot on his mind - not least coming out to his dad, ajnd the fact that Charlie might have an eating disorder.",
-
-    },
-    {
-      name: 'Mushin',
-      image: 'https://avatars.githubusercontent.com/u/65121810?v=4',
-      like: '1535',
-      unlike: '124',
-      comment: "Nick's been feeling the same, but he's got a lot on his mind - not least coming out to his dad, ajnd the fact that Charlie might have an eating disorder.",
-
-    }, {
-      name: 'Rishad',
-      image: 'https://avatars.githubusercontent.com/u/65121810?v=4',
-      like: '9000',
-      unlike: '124',
-      comment: "Nick's been feeling the same, but he's got a lot on his mind - not least coming out to his dad, ajnd the fact that Charlie might have an eating disorder.",
-
-    }
-  ]
-
 
   return (
     loading ? <Loding /> :
@@ -121,29 +102,22 @@ const ViewBook = () => {
             <StarIcon />
             <StarIcon />
             <StarOutlineIcon />
-            <p>5/5 | Rating:4599 |Reviews:3683 </p>
+            <p>5/5 | Rating:4599 |Reviews:{reviews.reviewCount} </p>
           </div>
           <button onClick={handleReview}>Write your Review</button>
           {isCommentInput && <CommentField book={id} />}
         </div>
         <hr />
-        {reviews &&
+        {isReview?
           <>
             {
-              reviews.map((data, i) => (
-                <>
-                  {data[0] ?
+              reviews.reviews.map((data, i) => (
                   <CommentCard {...data} key={i} />
-                :
-                  <h5>No comments yet</h5>}
-                  
-                </>
               ))
             }
           </>
-        }
-
-        <button>Show More</button>
+        :<h5>No reviews yet</h5>}
+        {isReview&&<button>Show More</button>}
       </div>
   );
 }

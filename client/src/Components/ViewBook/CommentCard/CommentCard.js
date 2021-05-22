@@ -1,17 +1,38 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import './CommentCard.scss'
 import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
 import ThumbDownAltOutlinedIcon from '@material-ui/icons/ThumbDownAltOutlined';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
+import instance from '../../../Assets/server/instance';
+import { useSelector } from 'react-redux';
+import Message from '../../Message/Message';
 
 
 function CommentCard(props) {
 
   const [liked,setLiked] = useState(false)
   const [unliked,setUnliked] = useState(false)
+  const [message,SetMessage] = useState(false)
+  const [commId,setCommId] = useState(props._id)
+  const essentials = useSelector(state => state.essentials)
 
-  const like = ()=>{
+  useEffect(() => {
+    const getLikesAndDislIkeCount = () =>{
+      instance.get('/get-like-and-dislikes-count/'+commId).then((response)=>{
+        if(response.status ===200){
+          console.log(commId,"=========",response.data);
+        }else{
+          getLikesAndDislIkeCount()
+        }
+        
+      })
+    }
+    getLikesAndDislIkeCount();
+  }, [])
+
+  const like = (commentId,condition)=>{
+    handleLike(commentId,condition);
     if(liked){
       setLiked(false)
     }else if(unliked){
@@ -22,7 +43,8 @@ function CommentCard(props) {
     }
   }
 
-  const unlike = ()=>{
+  const unlike = (commentId,condition)=>{
+    handleLike(commentId,condition);
     if(unliked){
       setUnliked(false)
     }else if(liked){
@@ -32,8 +54,23 @@ function CommentCard(props) {
       setUnliked(true)
     }
   }
+
+  const handleLike = (commentId,condition) =>{
+    if(essentials.userData){
+      instance.post('/like-or-dislike',{commentId:commentId,userId:essentials.userData.uid,condition:condition}).then(res => {
+        console.log(res);
+      })
+    }else{
+      SetMessage(true)
+      setTimeout(()=>{
+        SetMessage(false)
+      },2500)
+    }
+  }
+
     return (
       <div className="comment_container">
+        {message&&<Message message="Only loggedIn users able to like" link="/" linkText="Click here to login" color="red"/>}
         <div id="user_name">
           <img
             src={props.userData[0].photo}
@@ -41,15 +78,15 @@ function CommentCard(props) {
           />
           <p>{props.userData[0].name}</p>
         </div>
-        <p>
+        <p id="review-text-prop" className={props._id}>
           {props.review}
         </p>
         <div id="like_container">
             <div className="like_up">
-              {liked?<ThumbUpIcon onClick={() => like(props._id)}/>:<ThumbUpAltOutlinedIcon onClick={()=>like(props._id)}/>}<span>{props.like}</span>
+              {liked?<ThumbUpIcon onClick={() => like(props._id,"like")}/>:<ThumbUpAltOutlinedIcon onClick={()=>like(props._id,"like")}/>}<span>{props.like}</span>
             </div>
             <div className="like_down">
-              {unliked?<ThumbDownIcon onClick={() => unlike(props._id)}/>:<ThumbDownAltOutlinedIcon onClick={() => unlike(props._id)}/>}<span>{props.unlike}</span>
+              {unliked?<ThumbDownIcon onClick={() => unlike(props._id,"disLike")}/>:<ThumbDownAltOutlinedIcon onClick={() => unlike(props._id,"disLike")}/>}<span>{props.unlike}</span>
             </div>
         </div>
         <hr />

@@ -2,6 +2,7 @@ const db = require('../config/mongodb')
 const collection = require('../config/collections')
 const ObjectId = require('mongodb').ObjectId
 const { response } = require('express')
+const collections = require('../config/collections')
 
 
 
@@ -116,7 +117,86 @@ module.exports = {
             ]).toArray()
             resolve(reviews);
         })
+    },
+
+    getReviewsCount : (bookId) => {
+        return new Promise(async(resolve,reject) =>{
+            const reviewCount = await db.get().collection(collection.REVIEW_COLLECTION).count({bookId:bookId})
+            resolve(reviewCount)
+        })
+    },
+
+    likeReview : (reviewDetials) => {
+        return new Promise(async(resolve,reject) => {
+            const likeData = {
+                commentId : reviewDetials.commentId,
+                userId: reviewDetials.userId
+            }
+
+            const isLiked = await db.get().collection(collection.REVIEW_LIKES_COLLECTION).findOne({userId:reviewDetials.userId,commentId:reviewDetials.commentId})
+            const isDisLiked = await db.get().collection(collection.REVIEW_DISLIKES_COLLECTION).findOne({userId:reviewDetials.userId,commentId:reviewDetials.commentId})
+
+            if(reviewDetials.condition === "like"){
+                if(isLiked){
+
+                    db.get().collection(collection.REVIEW_LIKES_COLLECTION)
+                    .removeOne({userId:reviewDetials.userId,commentId:reviewDetials.commentId})
+                    .then(() =>{
+                        resolve(true)
+                    })
+            
+                
+                }else if(isDisLiked){
+                    db.get().collection(collection.REVIEW_DISLIKES_COLLECTION).removeOne({userId:reviewDetials.userId,commentId:reviewDetials.commentId})
+                    .then(()=>{
+                        db.get().collection(collection.REVIEW_LIKES_COLLECTION).insertOne(likeData).then((data) => {
+                            resolve("liked and remove dislike")
+                        })
+                    })
+                }
+                else{
+                    db.get().collection(collection.REVIEW_LIKES_COLLECTION).insertOne(likeData).then(() => {
+                        resolve(true)
+                    })
+                }
+            }else{
+                if(isDisLiked){
+                    db.get().collection(collection.REVIEW_DISLIKES_COLLECTION)
+                    .removeOne({userId:reviewDetials.userId,commentId:reviewDetials.commentId})
+                    .then(() =>{
+                        resolve(true)
+                    })
+                }else if(isLiked){
+                    db.get().collection(collection.REVIEW_LIKES_COLLECTION)
+                    .removeOne({userId:reviewDetials.userId,commentId:reviewDetials.commentId})
+                    .then(() =>{
+                        db.get().collection(collection.REVIEW_DISLIKES_COLLECTION).insertOne({userId:reviewDetials.userId,commentId:reviewDetials.commentId})
+                        .then(()=>{
+                            resolve(true)
+                        })
+                    })
+                }else{
+                    db.get().collection(collection.REVIEW_DISLIKES_COLLECTION).insertOne({userId:reviewDetials.userId,commentId:reviewDetials.commentId})
+                        .then(()=>{
+                            resolve(true)
+                        })
+                }
+            }
+        })
+    },
+    getLikeAndDislikeCount : (commentId) => {
+        return new Promise(async(resolve,reject) =>{
+            const likesCount = await db.get().collection(collection.REVIEW_LIKES_COLLECTION).count({commentId:commentId});
+            const disLikesCount = await db.get().collection(collection.REVIEW_DISLIKES_COLLECTION).count({commentId:commentId});
+            resolve({likesCount,disLikesCount});
+        })
     }
+    
 
 
 }
+
+
+
+
+

@@ -15,11 +15,11 @@ router.get('/get-home-books', function(req, res, next) {
             {
               newBooks:newBooks,
               mostViewedBooks:mostViewedBooks
-            }).catch(err =>{
-              res.json({status:false})
-              console.log(err);
             })
-       })
+       }).catch(err =>{
+        res.json({status:false})
+        console.log(err);
+      })
     })
 });
 
@@ -64,19 +64,36 @@ router.get('/getonebook/:id',(req,res)=>{
 
 router.get('/reviews/:id',(req,res) => {
   userHelpers.getReviews(req.params.id).then((reviews) => {
-    console.log("reviews",reviews);
-    res.json(reviews);
+    userHelpers.getReviewsCount(req.params.id).then((count)=>{
+      res.json({reviews:reviews,reviewCount:count})
+    })
   }).catch((err) => {
-    console.log("some errro ;;;;;;;;;;;;;;;;;;;;",err);
+    console.log(err);
   })
 })
 
 router.post('/add-comment',(req,res) => {
-  console.log("review in route",req.body);
   userHelpers.addReview(req.body).then((message)=>{
     res.json({message})
   })
 })
+
+router.post('/like-or-dislike',(req,res) => {
+  console.log("comment-details" ,req.body);
+  userHelpers.likeReview(req.body).then(() =>{
+    res.json({status:true});
+  })
+
+})
+
+router.get('/get-like-and-dislikes-count/:commentId',(req,res) => {
+  userHelpers.getLikeAndDislikeCount(req.params.commentId).then((response)=>{
+    console.log(response);
+    res.json(response)
+  })
+})
+
+
 router.get('/logout',(req,res)=>{
   req.session.destroy()
   res.json({status:true})
