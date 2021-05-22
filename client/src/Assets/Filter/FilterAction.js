@@ -6,8 +6,12 @@ const Action = {
 
     clearFilter:()=>({
         type:'REMOVE_FILTER'
-    })
+    }),
 
+    searchData:(data)=>({
+        type:'SEARCH',
+        payload:data
+    })
 }
 
 export default Action

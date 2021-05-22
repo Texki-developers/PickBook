@@ -15,7 +15,7 @@ function CommentCard(props) {
   const [liked,setLiked] = useState(false)
   const [unliked,setUnliked] = useState(false)
   const [message,SetMessage] = useState(false)
-  const [commId,setCommId] = useState(props._id)
+  const commId = props._id
   const essentials = useSelector(state => state.essentials)
 
   const like = (commentId,condition)=>{

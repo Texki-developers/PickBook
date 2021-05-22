@@ -269,6 +269,31 @@ module.exports = {
             ]).toArray()
             resolve(details)
         })
+    },
+
+    searchData: (data)=>{
+        return new Promise(async(resolve,reject)=>{
+
+            db.get().collection(collection.BOOK_COLLECTION).createIndex({
+                title:"text",
+                Language:"text",
+                Genres:"text",
+                categories:"text",
+                author:"text",
+                description:"text",
+                longDescription:"text"
+            }).then(async res=>{
+                
+                var details = await db.get().collection(collection.BOOK_COLLECTION).find({
+                    $text:{
+                        $search:data.text
+                    }
+                }).toArray()
+
+                resolve(details)
+            })
+
+        })
     }
 
 }

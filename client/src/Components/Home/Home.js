@@ -5,15 +5,15 @@ import HeroBg from './HeroBg/HeroBg'
 import Homecards from './HomeCards/Homecards'
 
 const Home = () => {
-    const [homeBooks, setHomeBooks] = useState(null)
     const [loading, setLoading] = useState(true)
-
+    const [homeBooks, setHomeBooks] = useState(null)
+    
     useEffect(() => {
         const getHomeBooks = async () => {
             instance.get('/get-home-books').then(async (response) => {
-                console.log("response",response);
-                console.log(homeBooks);
-                if(response.status == 200){
+                // console.log("response",response);
+                // console.log(homeBooks);
+                if(response.status === 200){
                     await setHomeBooks(
                         {
                             newBooks:response.data.newBooks,
@@ -22,7 +22,7 @@ const Home = () => {
                     setLoading(false)
                 }else{
                     getHomeBooks();
-                    console.log("no data;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;");
+                    // console.log("no data");
                 }
             })
         }
