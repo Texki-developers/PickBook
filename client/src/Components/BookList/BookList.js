@@ -24,7 +24,7 @@ const BookList = ()=>{
                     if(res.status===200){
                         await setBookList(res.data)
                         await setLoading(false)
-                        console.log(bookList);
+                        // console.log(bookList);
                     }else{
                         await getBooks();
                     }
@@ -45,12 +45,12 @@ const BookList = ()=>{
             
             
         }
-        console.log(filter);
+        // console.log(filter);
         getBooks()
     },[filter])
 
     const navigate = num=>{
-        console.log(bookList);
+        // console.log(bookList);
         if(currentPage===1 && num===-1){
             alert('Its the first page!')
         }else if(currentPage===totalPage && num===1){
@@ -60,7 +60,9 @@ const BookList = ()=>{
         }
     }
 
-    const totalPage = Math.floor(bookList.length/postPerPage+1) 
+    var totalPage = bookList.length/postPerPage>Math.floor(bookList.length/postPerPage)?
+                    Math.floor(bookList.length/postPerPage+1):Math.floor(bookList.length/postPerPage)
+        
     const indexOfLastPost = currentPage*postPerPage;
     const indexOfFirstPost = indexOfLastPost-postPerPage;
     const currentPosts = bookList.slice(indexOfFirstPost,indexOfLastPost);
@@ -69,7 +71,8 @@ const BookList = ()=>{
         loding?<Loading/>:
 
         <div className='booklist_container'>
-            <h1>Good Old Books</h1>
+            <h1>Books Listed As You Wish</h1>
+            <span>we found {bookList.length} results</span>
             <div className='booklist_list' >
                 {currentPosts.map((d,i)=>(
                     <BookCard coverImage={d.imageURL} key={i} bookId={d._id}/>

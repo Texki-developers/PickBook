@@ -29,7 +29,7 @@ const Addbook = () => {
   const dispatch = useDispatch();
   
   useEffect(() => {
-    console.log("component will mount");
+    // console.log("component will mount");
     dispatch(Actions.addIconToggle());
   }, [dispatch]);
 

@@ -38,7 +38,7 @@ const ViewBook = () => {
       instance.get(`/reviews/${id}`).then(async res => {
         console.log(res.data);
         setReviews(res.data)
-        if(res.data.reviewCount != 0){
+        if(res.data.reviewCount !== 0){
           setIsReview(true)
           console.log("false");
         }else{
@@ -49,7 +49,7 @@ const ViewBook = () => {
     }
     getBook();
     getReviews();
-  }, [])
+  }, [id])
 
   const handleReview = (event) => {
     event.preventDefault();

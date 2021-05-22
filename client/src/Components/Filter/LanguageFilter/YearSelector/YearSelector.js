@@ -4,7 +4,7 @@ import './YearSelector.scss'
 const  YearSelector = (props) => {
     const [year,setYear] = useState('')
     const handleInput = (event) => {
-     setYear(event.target.value+'-2021')
+     setYear(event.target.value+'')
     }
     return (
         <div className="year-selector-container">
