@@ -5,6 +5,7 @@ const FilterButton = (props) => {
     const [tick,setTick] = useState(false);
 
     const handleFilterButton = (event) => {
+        props.setdata({[props.title]:props.children})
         setTick(!tick);
     }
     return (
