@@ -8,7 +8,7 @@ import Actions from '../../Assets/Essentials/EssentialAction';
 import {useHistory} from 'react-router-dom'
 import instance from '../../Assets/server/instance';
 import FilterAction from '../../Assets/Filter/FilterAction'
-
+import Suggetions from './Suggetions/Suggetions'
 
 
 function Header() {
@@ -17,14 +17,20 @@ function Header() {
     const history = useHistory();
     const [search,setSearch] = useState('')
     const [suggesions,setSuggestions] = useState([])
+    
     const handleFilter = ()=>{
         dispath(Actions.getEssentials());
         dispath(Actions.toggleFilter())
     }
 
+    const reset = ()=>{
+        setSearch('')
+        setSuggestions([])
+    }
 
     const searchClick = async()=>{
         await dispath(FilterAction.searchData(search))
+        reset()
         history.push('booklist')
     }
 
@@ -32,8 +38,9 @@ function Header() {
         setSearch(val);
 
         await instance.post('/search',{text:search}).then(async res=>{
-            await setSuggestions(res.data)
-            await console.log(res);
+                await setSuggestions(res.data)
+                await console.log(res);
+            
         })
 
     }
@@ -63,17 +70,15 @@ function Header() {
 
             <div className="search_container">
                 <button onClick = {handleFilter}>Filter<FilterListIcon/></button>
-                <input type="text" 
-                placeholder='Search books, generes, authors......'
-                value={search}
-                onChange={e=>searchHandle(e.target.value)}
-                list='search_suggestions'
-                />
-                <datalist id='search_suggestions'>
-                    {suggesions.map((d,i)=>(
-                        <option value={d.title}></option>
-                    ))}
-                </datalist>
+                <div className="search_input">
+                    <input type="text" 
+                    placeholder='Search books, generes, authors......'
+                    value={search}
+                    onChange={e=>searchHandle(e.target.value)}
+                    list='search_suggestions'
+                    />
+                    <Suggetions dataList={suggesions} reset={()=>reset()}/>
+                </div>
                 <SearchIcon onClick={()=>searchClick()}/>
             </div>
             {essentials.isLogin? <img src={essentials.userData.photo} 
