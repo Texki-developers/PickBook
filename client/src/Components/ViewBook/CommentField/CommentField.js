@@ -16,7 +16,7 @@ const CommentField = (props) => {
             bookId : event.target[0].id,
             reviewer: essentials.userData.uid
         }
-        window.location.reload()
+        // window.location.reload()npm
         if(data.review!==''){
             instance.post('/add-comment',data).then((response) => {
                 setMessage(response.data.message);

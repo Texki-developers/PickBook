@@ -38,7 +38,6 @@ function CommentCard(props) {
     }
   }
 
-
   const unlike = (commentId,condition)=>{
     handleLike(commentId,condition);
     if(unliked){
