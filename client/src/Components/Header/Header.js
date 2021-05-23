@@ -9,6 +9,7 @@ import {useHistory} from 'react-router-dom'
 import instance from '../../Assets/server/instance';
 import FilterAction from '../../Assets/Filter/FilterAction'
 import Suggetions from './Suggetions/Suggetions'
+import LogOut from '../Home/LogOut/LogOut'
 
 
 function Header() {
@@ -17,6 +18,7 @@ function Header() {
     const history = useHistory();
     const [search,setSearch] = useState('')
     const [suggesions,setSuggestions] = useState([])
+    // const [Logout,setLogout]= useState(false)
     
     const handleFilter = ()=>{
         dispath(Actions.getEssentials());
@@ -46,6 +48,8 @@ function Header() {
     }
 
     const logout =async ()=>{
+        // setLogout(!logout)
+        
 
          
 
@@ -62,7 +66,7 @@ function Header() {
                 
             })
         }
-    }
+     }
 
     return (
         <div className='header_container'>
@@ -79,7 +83,9 @@ function Header() {
                     />
                     <Suggetions dataList={suggesions} reset={()=>reset()}/>
                 </div>
+               
                 <SearchIcon onClick={()=>searchClick()}/>
+                 <LogOut/>
             </div>
             {essentials.isLogin? <img src={essentials.userData.photo} 
             
