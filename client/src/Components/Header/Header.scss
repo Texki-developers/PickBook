@@ -11,7 +11,33 @@
     top: 0;
     left: 0;
     z-index: 1;
+    .logout-btn-hide{
+        opacity: 0;
+    }
+    .logout-btn{
+        position: absolute;
+        top: 7vh;
+        right: 0;
+        width: 8rem;
+        height: 2.5rem;
+        background-color: #fff;
+        border: none;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        outline: none;
+        transition: all 0.2s ease-in-out;
+        &:hover .logout-icon{
+            color: red;
+            path{
 
+                color: red;
+                stroke: red;
+            }
+        }
+    }
     h1{
         font-family: $logo;
         color: white;
@@ -31,7 +57,7 @@
         background-color: white;
         display: flex;
         justify-content: space-between;
-
+        
         button{
             outline: none;
             border: none;
@@ -101,7 +127,17 @@
 @media screen and (max-width:768px) {
     .header_container{
         justify-content: space-between;
-    
+        .logout-btn{
+            position: absolute;
+            top: 85vh;
+            right: 0;
+            width: 8rem;
+            height: 2.5rem;
+            background-color: #fff;
+            border: none;
+            font-weight: 600;
+        
+        }
         h1{
     
             font-size: 18px;
