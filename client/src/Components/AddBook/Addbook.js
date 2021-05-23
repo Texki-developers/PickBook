@@ -101,7 +101,7 @@ const Addbook = () => {
         <form className={classes.root} id="frm" autoComplete="off" onSubmit={handleSubmit}>
           <div className="inputs-container photo_upload">
             <input type="file" id="upload" onChange={viewImage} hidden />
-            <label style={{backgroundImage:`url(${url})`}}id="cover" for="upload" >ADD PHOTO</label>
+            <label style={{backgroundImage:`url(${url})`}} id="cover" for="upload" >ADD PHOTO</label>
             <label id="title">Cover photo</label>
             
           </div>
