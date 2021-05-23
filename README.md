@@ -2,23 +2,58 @@
 
 Pickbooks is an book searching website.Users can log in using their facebook or google account. Logged in users can upload books in this website. Similiarly, all users can get the uploaded book details. If they like the book,they have the option to review and rate it.Therefore, users can select good books by looking at reviews and ratings.Pickbooks also has the facility to buy the books if the users like it and want to read.
 
-## Developers of PICKBOOKS
+## Team Members
 
 ### 1.Muhsin
 [1](https://github.com/MUHSIN22/ "Link to Github")
-[2](https://www.linkedin.com/in/muhsin-neyyathur-515129208 "Link to Linkedin")
-[3](https://instagram.com/_muhsin22?utm_medium=copy_link "Link to Instagram")
+
 
 ### 2.Amshen
 [1](https://github.com/AmshenShanu07 "Link to Github")
-[2](https://instagram.com/amshen__shanu "Link to Instagram")
-[3](https://www.linkedin.com/in/amshen-yesudas-9977731b9/ "Link to Linkedin")
+
 
 ### 3.Rishad
 
 [1](github.com/rishadpt "Link to Github")
-[2](https://www.linkedin.com/in/mohammed-rishad-a80a24207 "Link to Linkedin")
-[3](https://www.instagram.com/invites/contact/?i=eo55kim52f2z&utm_content=273pwzf "Link to Instagram")
+
+## Team ID
+
+BFH/recNyZhhapVMN8Ozq/2021
+
+## Link to product walkthrough
+
+## How it works?
+1 - Users can view books through pickbooks
+2 - But only logged in users can to add books,review books,rate books and also to like or dislike the review
+3 - There are two login method by facebook account or google account
+4 - Users can filter books by year,genre and also by languages
+5 - Users can search books
+
+## Library used
+
+1 - React.js
+2 - Express framework
+
+## How to configure
+
+1 - Clone this github link [0](https://github.com/Texki-developers/PickBook)
+2 - Open the cloned folder
+3 - Open terminal
+
+### 4 - Use this command
+
+```bash
+npm install
+cd client
+npm install
+cd ..
+```
+
+## How to run
+
+```bash
+npm run mern
+```
 
 
 ## Technologies used
@@ -29,4 +64,6 @@ Pickbooks is an book searching website.Users can log in using their facebook or 
 4.Jsx
 5.SCSS
 6.Firebase
+
+
 
