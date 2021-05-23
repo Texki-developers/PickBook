@@ -25,7 +25,8 @@ Pickbooks is an book searching website.Users can log in using their facebook or 
 
 1.React.js
 2.Node.js
-3.MongoDB
+3.MongoDB Atlas
 4.Jsx
 5.SCSS
 6.Firebase
+

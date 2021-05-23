@@ -8,8 +8,6 @@ export class LogOut extends Component {
            <select className="logout" name="cars" id="cars">
                <option>Logout</option>
            </select>
-
-            
             </div>
         )
     }
