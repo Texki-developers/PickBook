@@ -9,6 +9,7 @@ import instance from '../../Assets/server/instance'
 import Message from '../Message/Message';
 import { useSelector } from 'react-redux';  
 import CommentField from './CommentField/CommentField';
+import RatingDrop from './RatingDrop/RatingDrop';
 
 
 const ViewBook = () => {
@@ -19,7 +20,7 @@ const ViewBook = () => {
   const [isCommentInput, setIsCommentInput] = useState(false)
   const [reviews, setReviews] = useState(false)
   const [isReview,setIsReview] = useState(false)
-
+  const [rating,setRating] = useState(false)
   const essentials = useSelector(state => state.essentials)
 
   useEffect(() => {
@@ -57,7 +58,18 @@ const ViewBook = () => {
       setIsCommentInput(!isCommentInput);
     } else {
       console.log("message");
-      setIsMessage(true)
+      setIsMessage("Please login to write you review")
+      setTimeout(() => {
+        setIsMessage(false)
+      }, 3000)
+    }
+  }
+
+  const handleRatingClick = () => {
+    if(essentials.userData){
+      setRating(!rating)
+    }else{
+      setIsMessage("Please login to rate a book")
       setTimeout(() => {
         setIsMessage(false)
       }, 3000)
@@ -68,7 +80,7 @@ const ViewBook = () => {
     loading ? <Loding /> :
 
       <div className="viewbook_container">
-        {isMessage && <Message message="Please login to write review" link="/" linkText="Click here to login" color="red" />}
+        {isMessage && <Message message={isMessage} link="/" linkText="Click here to login" color="red" />}
         <div className="book_container">
           <img
             src={details.imageURL}
@@ -83,7 +95,8 @@ const ViewBook = () => {
               <StarIcon />
               <StarIcon />
               <StarOutlineIcon />
-              <button>Rate the book</button>
+              <button onClick={handleRatingClick}>Rate the book</button>
+              {rating&&<RatingDrop/>}
             </div>
             <button>Get This Book</button>
           </div>

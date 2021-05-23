@@ -30,6 +30,7 @@ function CommentCard(props) {
     }
   }
 
+
   const unlike = (commentId,condition)=>{
     handleLike(commentId,condition);
     if(unliked){
@@ -70,10 +71,17 @@ function CommentCard(props) {
         </p>
         <div id="like_container">
             <div className="like_up">
-              {liked?<ThumbUpIcon onClick={() => like(props._id,"like")}/>:<ThumbUpAltOutlinedIcon onClick={()=>like(props._id,"like")}/>}<span>{props.userData[0].likes}</span>
+              {liked?<ThumbUpIcon onClick={() => like(props._id,"like")}/>:<ThumbUpAltOutlinedIcon onClick={()=>like(props._id,"like")}/>}
+              {props.likes?
+              <span>{props.likes.length}</span>  
+              :<span>0</span>}
+              
             </div>
             <div className="like_down">
-              {unliked?<ThumbDownIcon onClick={() => unlike(props._id,"disLike")}/>:<ThumbDownAltOutlinedIcon onClick={() => unlike(props._id,"disLike")}/>}<span>{props.unlike}</span>
+              {unliked?<ThumbDownIcon onClick={() => unlike(props._id,"disLike")}/>:<ThumbDownAltOutlinedIcon onClick={() => unlike(props._id,"disLike")}/>}
+              {props.disLikes?
+                <span>{props.unlike}</span>
+              :<span>0</span>}
             </div>
         </div>
         <hr />

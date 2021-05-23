@@ -7,6 +7,7 @@ import './CommentField.scss'
 const CommentField = (props) => {
     const essentials = useSelector(state => state.essentials)
     const [message,setMessage] = useState(null)
+    const [isEmpty,setIsMessage] = useState(false)
     const handleCommentSubmit = (event) => {
         event.preventDefault();
         const data = {
@@ -14,13 +15,15 @@ const CommentField = (props) => {
             bookId : event.target[0].id,
             reviewer: essentials.userData.uid
         }
-        instance.post('/add-comment',data).then((response) => {
-            setMessage(response.data.message);
-            event.target[0].value = "";
-            setTimeout(() => {
-                setMessage(null)
-            },2000)
-        })
+        if(data.review!=''){
+            instance.post('/add-comment',data).then((response) => {
+                setMessage(response.data.message);
+                event.target[0].value = "";
+                setTimeout(() => {
+                    setMessage(null)
+                },2000)
+            })
+        }
     }
     return (
         <form className="comment-field" onSubmit={handleCommentSubmit}>

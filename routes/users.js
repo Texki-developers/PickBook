@@ -87,6 +87,14 @@ router.post('/like-or-dislike',(req,res) => {
 
 })
 
+router.post('/post-rating',(req,res) =>{
+  console.log(req.body);
+  userHelpers.rateBook(req.body).then(response=>{
+    console.log("book rated",response);
+    res.json({status:true})
+  })
+})
+
 router.get('/logout',(req,res)=>{
   req.session.destroy()
   res.json({status:true})

@@ -294,6 +294,43 @@ module.exports = {
             })
 
         })
+    },
+
+    rateBook : (details) =>{
+        return new Promise(async(resolve,reject) =>{
+            const isRated = await db.get().collection(collection.BOOK_COLLECTION).findOne({_id:ObjectId(details.bookId),rate:{uid:details.userId}})
+
+            console.log("is rated",isRated);
+
+            if(isRated != null){
+                db.get().collection(collection.BOOK_COLLECTION).updateOne(
+                    {
+                        _id:ObjectId(details.bookId)
+                    },
+                    {
+                        $pull:{
+                            rate:{uid:details.userId,rate:details.rate},
+                        }
+                    }
+                ).then(() =>{
+                    resolve(false)
+                })
+            }else{
+                db.get().collection(collection.BOOK_COLLECTION).updateOne(
+                    {
+                        _id:ObjectId(details.bookId)
+                    },
+                    {
+                        $push:{
+                            rate:{uid:details.userId,rate:details.rate},
+                        }
+                    }
+                ).then(() =>{
+                    resolve(true)
+                })
+            }
+            
+        })
     }
 
 }
