@@ -102,7 +102,7 @@ const ViewBook = () => {
               <button onClick={handleRatingClick}>Rate the book</button>
               {rating && <RatingDrop />}
             </div>
-            <button>Get This Book</button>
+            <button onClick={()=>window.open(details.link)}>Get This Book</button>
           </div>
         </div>
         <div className="book_description">
@@ -134,7 +134,7 @@ const ViewBook = () => {
             }
           </>
           : <h5>No reviews yet</h5>}
-        <button>Show More</button>
+        <button id='show_more'>Show More</button>
       </div>
   );
 }
