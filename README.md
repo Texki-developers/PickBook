@@ -4,7 +4,7 @@ Pickbooks is an book searching website.Users can log in using their facebook or 
 
 ## Team Members
 
-### 1.[Muhsin](https://instagram.com/_muhsin22?utm_medium=copy_link "Link to Instagram")
+### 1.[Muhsin](https://github.com/MUHSIN22 "Link to Github")
 
 ### 2.[Amshen](https://github.com/AmshenShanu07 "Link to Github")
 
@@ -18,6 +18,8 @@ valuble time for it. So don't forget to clap for them...
 ### BFH/recNyZhhapVMN8Ozq/2021
 
 ## Link to product walkthrough
+
+[Youtube](https://youtu.be/4poEe-30ij8 "Link to youtube walkthrough")
 
 ## How it works?
 1 - Users can view books through pickbooks
@@ -45,6 +47,8 @@ valuble time for it. So don't forget to clap for them...
 ```cd ..```
 
 ## How to run
+
+Just run this command+
 
 ```npm run mern```
 
