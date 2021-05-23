@@ -35,10 +35,6 @@ const ViewBook = () => {
         }
       })
     }
-
-
-    
-
     const getReviews = () => {
       instance.get(`/reviews/${id}`).then(async res => {
         setReviews(res.data)
