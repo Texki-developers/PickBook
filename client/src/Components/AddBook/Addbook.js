@@ -28,6 +28,7 @@ const Addbook = () => {
   const [bookDetails, setBookDetails] = useState({})
   const [fileName, setFileName] = useState(null)
   const [file, setFile] = useState(null);
+  const [url, setUrl] = useState(null)
   const essentials = useSelector(state => state.essentials);
   const dispatch = useDispatch();
   
@@ -46,6 +47,7 @@ const Addbook = () => {
     console.log("asdfjaksdjfasdddddddddddddddddddddddd",event.target.file[0]);
     var date = new Date();
     setFileName(date.getTime() + "-" + date.getDate() + "-" + date.getFullYear() + "-" + date.getMonth() + "-")
+    setUrl(URL.createObjectURL(event.target.files[0]))
   }
 
   const handleInput = (event) => {
@@ -94,6 +96,7 @@ const Addbook = () => {
     
   }
 
+
   return (
     <div className="add_book_container">
       {essentials.userData?
@@ -102,8 +105,9 @@ const Addbook = () => {
         <form className={classes.root} id="frm" autoComplete="off" onSubmit={handleSubmit}>
           <div className="inputs-container photo_upload">
             <input type="file" id="upload" onChange={viewImage} hidden />
-            <label id="cover" for="upload" >ADD PHOTO</label>
+            <label style={{backgroundImage:`url(${url})`}} id="cover" for="upload" >ADD PHOTO</label>
             <label id="title">Cover photo</label>
+            
           </div>
           <div className="inputs-container">
             <TextField className="inputs" label="IBN Number" required name='ibn' onChange={handleInput} />
