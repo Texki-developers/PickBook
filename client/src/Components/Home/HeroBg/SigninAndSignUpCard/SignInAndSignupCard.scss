@@ -15,6 +15,7 @@
     }
     .have-or-not{
         font-weight: 600;
+        font-size: 0.8rem;
         @include linkDecorationNone(rgb(0, 0, 93));
     }
 }
@@ -23,7 +24,7 @@
         padding: 2rem 1.5rem;
         margin-top: 1rem;
         .have-or-not{
-            font-size: 0.8rem;
+            font-size: 0.6rem;
         }
     }
 }

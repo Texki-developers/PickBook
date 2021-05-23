@@ -17,6 +17,7 @@
         color: white;
         font-weight: 300;
         font-size: 30px;
+        cursor: pointer;
 
         strong{
             font-weight: 600;
@@ -55,14 +56,21 @@
             }
         }
 
-        input{
+        .search_input{
             width: 100%;
-            outline: none;
-            border: 0;
-            margin: 0 15px 0;
-            &:focus{
+            display: flex;
+            flex-direction: column;
+            height: fit-content;
+            input{
+                width: 100%;
                 outline: none;
                 border: 0;
+                margin: 0 15px 0;
+                padding: 10px;
+                &:focus{
+                    outline: none;
+                    border: 0;
+                }
             }
         }
 
@@ -77,6 +85,13 @@
         color: white;
         width: 30px;
         height: 50%;
+    }
+
+    img{
+        width: 40px;
+        object-fit: contain;
+        border-radius: 40px;
+        cursor: pointer;
     }
 }
 
@@ -98,6 +113,10 @@
     
         .MuiSvgIcon-root{
             display: none;
+        }
+        img{
+            margin-left: auto;
+            width: 25px;
         }
     }    
 }

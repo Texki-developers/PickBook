@@ -1,0 +1,26 @@
+.not-logged-in{
+    text-align: center;
+    .oops{
+        width: 10rem;
+    }
+    .oops-text{
+        font-weight: 600;
+        color: red;
+        margin-top: 1rem;
+    }
+    .oops-link{
+        margin-top: 1rem;
+        color: rgb(9, 9, 75);
+        text-decoration: none;
+    }
+}
+@media only screen and (max-width:420px){
+    .not-logged-in{
+        .oops{
+            width: 8rem;
+        }
+        .oops-text,.oops-link{
+            font-size: 0.8rem;
+        }
+    }
+}

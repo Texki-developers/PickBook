@@ -1,9 +1,9 @@
 import { combineReducers } from "redux";
-import essential from "./Reducers/Essentials";
-import filterToggle from "./Reducers/FilterToggle";
+import essential from "./Essentials/Essentials";
+import filter from './Filter/FilterReducer'
 
 const allReducers = combineReducers({
-    filter: filterToggle,
     essentials: essential,
+    filter: filter
 })
 export default allReducers;

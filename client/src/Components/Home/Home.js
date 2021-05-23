@@ -1,38 +1,42 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import instance from '../../Assets/server/instance'
+import PreLoader from '../PreLoader/PreLoader'
 import HeroBg from './HeroBg/HeroBg'
 import Homecards from './HomeCards/Homecards'
-const bookCover = [
-    {
-        image:'/book-cover/cover1.jpg'
-    },
-    {
-        image:'/book-cover/cover2.jpg'
-    },
-    {
-        image:'/book-cover/cover3.jpg'
-    },
-    {
-        image:'/book-cover/cover4.jpg'
-    },
-    {
-        image:'/book-cover/cover5.jpg'
-    },
-    {
-        image:'/book-cover/cover6.jpg'
-    },
-    {
-        image:'/book-cover/cover7.jpg'
-    },
-    {
-        image:'/book-cover/cover8.jpg'
-    },
-]
+
 const Home = () => {
+    const [loading, setLoading] = useState(true)
+    const [homeBooks, setHomeBooks] = useState(null)
+    
+    useEffect(() => {
+        const getHomeBooks = async () => {
+            instance.get('/get-home-books').then(async (response) => {
+                // console.log("response",response);
+                // console.log(homeBooks);
+                if(response.status === 200){
+                    await setHomeBooks(
+                        {
+                            newBooks:response.data.newBooks,
+                            mostViewedBooks: response.data.mostViewedBooks
+                        });
+                    setLoading(false)
+                }else{
+                    getHomeBooks();
+                    // console.log("no data");
+                }
+            })
+        }
+        getHomeBooks();
+    }, [])
+
     return (
         <div>
-            <HeroBg/>
-            <Homecards bookCover={bookCover} heading='Newly Uploaded Books'/>
-            <Homecards bookCover={bookCover} heading='Most Viewed Books'/>
+            {loading ? <PreLoader /> :
+                <>
+                    <HeroBg />
+                    <Homecards bookCover={homeBooks.newBooks} heading='Newly Uploaded Books' />
+                    <Homecards bookCover={homeBooks.mostViewedBooks} heading='Most Viewed Books' />
+                </>}
         </div>
     )
 }

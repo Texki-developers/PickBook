@@ -3,7 +3,7 @@ var  mongo = require('mongodb').MongoClient
 var state = {db:null}
 
 
-var url = 'mongodb+srv://amshenshanu:texkidev@texkidevelopers.4vbb0.mongodb.net/FreshAndCheap'
+var url = 'mongodb+srv://amshenshanu:texkidev@texkidevelopers.4vbb0.mongodb.net/PickBook'
 
 module.exports.connect = ()=>{
     const dbName = 'PickBook'
