@@ -100,7 +100,7 @@
 
 @media screen and (max-width:768px) {
     .header_container{
-        justify-content: center;
+        justify-content: space-between;
     
         h1{
     
@@ -108,7 +108,29 @@
         }
     
         .search_container{
-            display: none;
+            width: 50%;
+            height: 30px; 
+            font-size: 5px;
+
+            button{
+                display: none;
+            }
+            h1{
+                margin: 0%;
+            }
+            .search_input{
+                width: 80%;
+                input{
+                    
+                    padding: 5px;
+                }
+
+            }
+    
+            .MuiSvgIcon-root{
+                width: 25px;
+                display: block;
+            }
         }
     
         .MuiSvgIcon-root{
@@ -116,7 +138,7 @@
         }
         img{
             margin-left: auto;
-            width: 25px;
+            display: none;
         }
     }    
 }

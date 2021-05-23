@@ -22,3 +22,16 @@
         }
     }
 }
+
+@media screen and (max-width:768px) {
+    .sug_container{
+        div{
+            p{
+                text-align: center;
+                padding: 5px;
+                font-size: 12px;
+                cursor: pointer;
+            }
+        }
+    }
+}

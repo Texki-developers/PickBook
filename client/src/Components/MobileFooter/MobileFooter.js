@@ -35,7 +35,7 @@ const MobileFooter = () => {
 
     return (
         <div className="mobile-footer">
-            <MobileOptions option="Search"  icon={<BsSearch/>}/>
+            {/* <MobileOptions option="Search"  icon={<BsSearch/>}/> */}
             <MobileOptions option="Add books" click="/add-book" icon={<GrAdd/>}/>
             <MobileOptions option="Filter" click="filter" icon={<FaFilter/>}/>
             <MobileOptions option="Account" click={essentials.isLogin?'logout':null} 
