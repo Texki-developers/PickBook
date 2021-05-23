@@ -4,6 +4,7 @@ import PreLoader from '../PreLoader/PreLoader'
 import HeroBg from './HeroBg/HeroBg'
 import Homecards from './HomeCards/Homecards'
 
+
 const Home = () => {
     const [loading, setLoading] = useState(true)
     const [homeBooks, setHomeBooks] = useState(null)
