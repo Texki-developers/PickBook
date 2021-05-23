@@ -8,7 +8,7 @@ var session = require('express-session')
 
 var adminRouter = require('./routes/admin');
 var usersRouter = require('./routes/users');
-
+var cors = require('cors')
 var app = express();
 
 // view engine setup
@@ -17,6 +17,7 @@ var app = express();
 
 app.use(logger('dev'));
 app.use(express.json());
+app.use(cors())
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(session({secret:'PickBook', saveUninitialized:true, resave:false,cookie:{maxAge:500000}}))
