@@ -7,7 +7,7 @@ import Loding from '../PreLoader/PreLoader'
 import { useParams } from 'react-router';
 import instance from '../../Assets/server/instance'
 import Message from '../Message/Message';
-import { useSelector } from 'react-redux';  
+import { useSelector } from 'react-redux';
 import CommentField from './CommentField/CommentField';
 import RatingDrop from './RatingDrop/RatingDrop';
 
@@ -19,8 +19,9 @@ const ViewBook = () => {
   const [isMessage, setIsMessage] = useState(false)
   const [isCommentInput, setIsCommentInput] = useState(false)
   const [reviews, setReviews] = useState(false)
-  const [isReview,setIsReview] = useState(false)
-  const [rating,setRating] = useState(false)
+  const [isReview, setIsReview] = useState(false)
+  const [rating, setRating] = useState(false)
+  const [ratingValue, setRatingValue] = useState(false)
   const essentials = useSelector(state => state.essentials)
 
   useEffect(() => {
@@ -39,15 +40,22 @@ const ViewBook = () => {
       instance.get(`/reviews/${id}`).then(async res => {
         console.log(res.data);
         setReviews(res.data)
-        if(res.data.reviewCount !== 0){
+        if (res.data.reviewCount !== 0) {
           setIsReview(true)
           console.log("false");
-        }else{
+        } else {
           setIsReview(false)
           console.log(true);
         }
       })
-    }
+    },
+      getRating = () => {
+        instance.get(`/rating/${id}`).then(res => {
+          console.log("rating ", res);
+          setRatingValue(res.data);
+        })
+      }
+    getRating();
     getBook();
     getReviews();
   }, [id])
@@ -66,9 +74,9 @@ const ViewBook = () => {
   }
 
   const handleRatingClick = () => {
-    if(essentials.userData){
+    if (essentials.userData) {
       setRating(!rating)
-    }else{
+    } else {
       setIsMessage("Please login to rate a book")
       setTimeout(() => {
         setIsMessage(false)
@@ -90,13 +98,13 @@ const ViewBook = () => {
             <h1>{details.title}</h1>
             <p>by {details.author}</p>
             <div className="star_review">
-              <StarIcon />
-              <StarIcon />
-              <StarIcon />
-              <StarIcon />
-              <StarOutlineIcon />
+              {ratingValue.ratingValue >= 1 ? <StarIcon /> : <StarOutlineIcon />}
+              {ratingValue.ratingValue >= 2 ? <StarIcon /> : <StarOutlineIcon />}
+              {ratingValue.ratingValue >= 3 ? <StarIcon /> : <StarOutlineIcon />}
+              {ratingValue.ratingValue >= 4 ? <StarIcon /> : <StarOutlineIcon />}
+              {ratingValue.ratingValue >= 5 ? <StarIcon /> : <StarOutlineIcon />}
               <button onClick={handleRatingClick}>Rate the book</button>
-              {rating&&<RatingDrop/>}
+              {rating && <RatingDrop />}
             </div>
             <button>Get This Book</button>
           </div>
@@ -110,27 +118,27 @@ const ViewBook = () => {
         <div className="book_review">
           <h2>Reviews of this book</h2>
           <div className="review_details">
-            <StarIcon />
-            <StarIcon />
-            <StarIcon />
-            <StarIcon />
-            <StarOutlineIcon />
-            <p>5/5 | Rating:4599 |Reviews:{reviews.reviewCount} </p>
+            {ratingValue.ratingValue >= 1 ? <StarIcon /> : <StarOutlineIcon />}
+            {ratingValue.ratingValue >= 2 ? <StarIcon /> : <StarOutlineIcon />}
+            {ratingValue.ratingValue >= 3 ? <StarIcon /> : <StarOutlineIcon />}
+            {ratingValue.ratingValue >= 4 ? <StarIcon /> : <StarOutlineIcon />}
+            {ratingValue.ratingValue >= 5 ? <StarIcon /> : <StarOutlineIcon />}
+            <p>{ratingValue ? " "+ratingValue.ratingValue + "/5 | Rating: " + ratingValue.ratingCount : " 0/5 | Rating: 0"} |Reviews:{reviews.reviewCount} </p>
           </div>
           <button onClick={handleReview}>Write your Review</button>
           {isCommentInput && <CommentField book={id} />}
         </div>
         <hr />
-        {isReview?
+        {isReview ?
           <>
             {
               reviews.reviews.map((data, i) => (
-                  <CommentCard {...data} key={i} />
+                <CommentCard {...data} key={i} />
               ))
             }
           </>
-        :<h5>No reviews yet</h5>}
-        {isReview&&<button>Show More</button>}
+          : <h5>No reviews yet</h5>}
+        {isReview && <button>Show More</button>}
       </div>
   );
 }

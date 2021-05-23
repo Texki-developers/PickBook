@@ -73,6 +73,12 @@ router.get('/reviews/:id',(req,res) => {
   })
 })
 
+router.get('/rating/:id',(req,res) => {
+  userHelpers.getRating(req.params.id).then(response=>{
+    res.json(response);
+  })
+})
+
 router.post('/add-comment',(req,res) => {
   userHelpers.addReview(req.body).then((message)=>{
     res.json({message})

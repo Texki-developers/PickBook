@@ -8,13 +8,13 @@ const collections = require('../config/collections')
 
 module.exports = {
 
-    addUser:(data)=>{
-        return new Promise(async(resolve,reject)=>{
-            var user = await db.get().collection(collection.USER_COLLECTION).find({uid:data.uid}).toArray()
+    addUser: (data) => {
+        return new Promise(async (resolve, reject) => {
+            var user = await db.get().collection(collection.USER_COLLECTION).find({ uid: data.uid }).toArray()
             // console.log(user.length);
 
-            if(user.length===0){
-                db.get().collection(collection.USER_COLLECTION).insertOne(data).then(res=>{
+            if (user.length === 0) {
+                db.get().collection(collection.USER_COLLECTION).insertOne(data).then(res => {
                     resolve(res.ops[0])
                 })
 
@@ -43,7 +43,7 @@ module.exports = {
                         imageURL: 1
                     }
                 }
-            ]).sort({_id:-1}).limit(12).toArray()
+            ]).sort({ _id: -1 }).limit(12).toArray()
             // console.log(newUpdatedBooks)
             resolve(newUpdatedBooks)
         })
@@ -97,7 +97,7 @@ module.exports = {
             console.log(bookId);
             const reviews = await db.get().collection(collection.REVIEW_COLLECTION).aggregate([
                 {
-                    $match:{bookId:bookId}
+                    $match: { bookId: bookId }
                 },
                 {
                     $lookup: {
@@ -105,165 +105,165 @@ module.exports = {
                         localField: 'reviewer',
                         foreignField: 'uid',
                         as: 'userData'
-                      }
+                    }
                 },
                 {
-                    $project:{
-                        userData:{photo:1,name:1},
-                        reviewer:1,
-                        review:1,
-                        likes:1,
-                        disLikes:1
-                      }
+                    $project: {
+                        userData: { photo: 1, name: 1 },
+                        reviewer: 1,
+                        review: 1,
+                        likes: 1,
+                        disLikes: 1
+                    }
                 }
             ]).toArray()
             resolve(reviews);
         })
     },
-    getReviewsCount : (bookId) => {
-        return new Promise(async(resolve,reject) =>{
-            const reviewCount = await db.get().collection(collection.REVIEW_COLLECTION).count({bookId:bookId})
+    getReviewsCount: (bookId) => {
+        return new Promise(async (resolve, reject) => {
+            const reviewCount = await db.get().collection(collection.REVIEW_COLLECTION).count({ bookId: bookId })
             resolve(reviewCount)
         })
     },
-    likeReview : (reviewDetails) =>{
-        return new Promise(async(resolve,reject) =>{
+    likeReview: (reviewDetails) => {
+        return new Promise(async (resolve, reject) => {
 
             const commentId = reviewDetails.commentId
             const userId = reviewDetails.userId
-            
+
             const isLiked = await db.get().collection(collection.REVIEW_COLLECTION).findOne(
                 {
-                    _id:ObjectId(commentId),
-                    likes:{uid:userId}
+                    _id: ObjectId(commentId),
+                    likes: { uid: userId }
                 })
             const isDisLiked = await db.get().collection(collection.REVIEW_COLLECTION).findOne(
                 {
-                    _id:ObjectId(commentId),
-                    disLikes:{uid:userId}
+                    _id: ObjectId(commentId),
+                    disLikes: { uid: userId }
                 })
-            console.log("isLiked = ",isLiked);
-            
-            if(reviewDetails.condition === 'like'){
-                if(isLiked != null){
+            console.log("isLiked = ", isLiked);
+
+            if (reviewDetails.condition === 'like') {
+                if (isLiked != null) {
                     db.get().collection(collection.REVIEW_COLLECTION).updateOne(
                         {
-                            _id:ObjectId(commentId)
+                            _id: ObjectId(commentId)
                         },
                         {
-                            $pull:{
-                                likes:{uid:userId}
+                            $pull: {
+                                likes: { uid: userId }
                             }
                         }
-                        ).then(()=>{
-                            console.log("value pulled");
+                    ).then(() => {
+                        console.log("value pulled");
+                        resolve("liked")
+                    })
+                } else if (isDisLiked != null) {
+                    db.get().collection(collection.REVIEW_COLLECTION).updateOne(
+                        {
+                            _id: ObjectId(commentId)
+                        },
+                        {
+                            $pull: {
+                                disLikes: { uid: userId }
+                            }
+                        }
+                    ).then(() => {
+                        db.get().collection(collection.REVIEW_COLLECTION).updateOne(
+                            {
+                                _id: ObjectId(commentId)
+                            },
+                            {
+                                $push: {
+                                    likes: { uid: userId }
+                                }
+                            }
+                        ).then(() => {
+                            console.log("dislike remove and like");
                             resolve("liked")
                         })
-                }else if(isDisLiked != null){
+                    })
+                } else {
                     db.get().collection(collection.REVIEW_COLLECTION).updateOne(
                         {
-                            _id:ObjectId(commentId)
+                            _id: ObjectId(commentId)
                         },
                         {
-                            $pull:{
-                                disLikes:{uid:userId}
+                            $push: {
+                                likes: { uid: userId }
                             }
                         }
-                        ).then(()=>{
-                            db.get().collection(collection.REVIEW_COLLECTION).updateOne(
-                                {
-                                    _id:ObjectId(commentId)
-                                },
-                                {
-                                    $push:{
-                                        likes:{uid:userId}
-                                    }
-                                }
-                                ).then(()=>{
-                                    console.log("dislike remove and like");
-                                    resolve("liked")
-                             })
-                     })
-                }else{
-                    db.get().collection(collection.REVIEW_COLLECTION).updateOne(
-                        {
-                            _id:ObjectId(commentId)
-                        },
-                        {
-                            $push:{
-                                likes:{uid:userId}
-                            }
-                        }
-                        ).then(()=>{
-                            resolve("liked")
-                     })
+                    ).then(() => {
+                        resolve("liked")
+                    })
                 }
-            }else{
-                if(isDisLiked != null){
+            } else {
+                if (isDisLiked != null) {
                     db.get().collection(collection.REVIEW_COLLECTION).updateOne(
                         {
-                            _id:ObjectId(commentId)
+                            _id: ObjectId(commentId)
                         },
                         {
-                            $pull:{
-                                disLikes:{uid:userId}
+                            $pull: {
+                                disLikes: { uid: userId }
                             }
                         }
-                        ).then(()=>{
-                            console.log("value dislike pulled");
+                    ).then(() => {
+                        console.log("value dislike pulled");
+                        resolve("liked")
+                    })
+                } else if (isLiked != null) {
+                    db.get().collection(collection.REVIEW_COLLECTION).updateOne(
+                        {
+                            _id: ObjectId(commentId)
+                        },
+                        {
+                            $pull: {
+                                likes: { uid: userId }
+                            }
+                        }
+                    ).then(() => {
+                        db.get().collection(collection.REVIEW_COLLECTION).updateOne(
+                            {
+                                _id: ObjectId(commentId)
+                            },
+                            {
+                                $push: {
+                                    disLikes: { uid: userId }
+                                }
+                            }
+                        ).then(() => {
+                            console.log("like remove and dislike");
                             resolve("liked")
                         })
-                }else if(isLiked != null){
+                    })
+                } else {
                     db.get().collection(collection.REVIEW_COLLECTION).updateOne(
                         {
-                            _id:ObjectId(commentId)
+                            _id: ObjectId(commentId)
                         },
                         {
-                            $pull:{
-                                likes:{uid:userId}
+                            $push: {
+                                disLikes: { uid: userId }
                             }
                         }
-                        ).then(()=>{
-                            db.get().collection(collection.REVIEW_COLLECTION).updateOne(
-                                {
-                                    _id:ObjectId(commentId)
-                                },
-                                {
-                                    $push:{
-                                        disLikes:{uid:userId}
-                                    }
-                                }
-                                ).then(()=>{
-                                    console.log("like remove and dislike");
-                                    resolve("liked")
-                             })
-                     })
-                }else{
-                    db.get().collection(collection.REVIEW_COLLECTION).updateOne(
-                        {
-                            _id:ObjectId(commentId)
-                        },
-                        {
-                            $push:{
-                                disLikes:{uid:userId}
-                            }
-                        }
-                        ).then(()=>{
-                            console.log("disLiked");
-                            resolve("liked")
-                     })
+                    ).then(() => {
+                        console.log("disLiked");
+                        resolve("liked")
+                    })
                 }
             }
         })
     },
-    filterdata:(data)=>{
-        return new Promise(async(resolve,reject)=>{
+    filterdata: (data) => {
+        return new Promise(async (resolve, reject) => {
             var details = await db.get().collection(collection.BOOK_COLLECTION).aggregate([
                 {
-                    $match:data
-                },{
-                    $project:{
-                        imageURL:1
+                    $match: data
+                }, {
+                    $project: {
+                        imageURL: 1
                     }
                 }
             ]).toArray()
@@ -271,22 +271,22 @@ module.exports = {
         })
     },
 
-    searchData: (data)=>{
-        return new Promise(async(resolve,reject)=>{
+    searchData: (data) => {
+        return new Promise(async (resolve, reject) => {
 
             db.get().collection(collection.BOOK_COLLECTION).createIndex({
-                title:"text",
-                Language:"text",
-                Genres:"text",
-                categories:"text",
-                author:"text",
-                description:"text",
-                longDescription:"text"
-            }).then(async res=>{
-                
+                title: "text",
+                Language: "text",
+                Genres: "text",
+                categories: "text",
+                author: "text",
+                description: "text",
+                longDescription: "text"
+            }).then(async res => {
+
                 var details = await db.get().collection(collection.BOOK_COLLECTION).find({
-                    $text:{
-                        $search:data.text
+                    $text: {
+                        $search: data.text
                     }
                 }).toArray()
 
@@ -296,40 +296,75 @@ module.exports = {
         })
     },
 
-    rateBook : (details) =>{
-        return new Promise(async(resolve,reject) =>{
-            const isRated = await db.get().collection(collection.BOOK_COLLECTION).findOne({_id:ObjectId(details.bookId),rate:{uid:details.userId}})
+    rateBook: (details) => {
+        return new Promise(async (resolve, reject) => {
+            const isRated = await db.get().collection(collection.BOOK_COLLECTION).findOne({ _id: ObjectId(details.bookId), rate: { $elemMatch: { uid: details.userId } } })
 
-            console.log("is rated",isRated);
+            console.log("is rated", isRated);
 
-            if(isRated != null){
+            if (isRated != null) {
                 db.get().collection(collection.BOOK_COLLECTION).updateOne(
                     {
-                        _id:ObjectId(details.bookId)
+                        _id: ObjectId(details.bookId)
                     },
                     {
-                        $pull:{
-                            rate:{uid:details.userId,rate:details.rate},
+                        $pull: {
+                            rate: { uid: details.userId },
                         }
-                    }
-                ).then(() =>{
-                    resolve(false)
+                    },
+                    { new: true }
+                ).then(() => {
+                    db.get().collection(collection.BOOK_COLLECTION).updateOne(
+                        {
+                            _id: ObjectId(details.bookId)
+                        },
+                        {
+                            $push: {
+                                rate: { uid: details.userId, rate: details.rate },
+                            }
+                        }
+                    ).then((data) => {
+                        resolve(true)
+                    })
                 })
-            }else{
+            } else {
                 db.get().collection(collection.BOOK_COLLECTION).updateOne(
                     {
-                        _id:ObjectId(details.bookId)
+                        _id: ObjectId(details.bookId)
                     },
                     {
-                        $push:{
-                            rate:{uid:details.userId,rate:details.rate},
+                        $push: {
+                            rate: { uid: details.userId, rate: details.rate },
                         }
                     }
-                ).then(() =>{
+                ).then((data) => {
                     resolve(true)
                 })
             }
-            
+
+        })
+    },
+
+    getRating: (bookId) => {
+        return new Promise(async (resolve, reject) => {
+            const count = await db.get().collection(collection.BOOK_COLLECTION).aggregate([
+                {
+                    $match:{_id:ObjectId(bookId)}
+                },
+                {
+                    $unwind:"$rate"
+                },
+                {
+                    $group:{
+                        _id:null,
+                        count:{$sum:1},
+                        totalRating:{$sum:"$rate.rate"}
+                    }
+                }
+            ]).toArray()
+
+            const ratingValue = (count[0].totalRating/(count[0].count*5))*5
+            resolve({ratingValue:ratingValue,ratingCount:count[0].count})
         })
     }
 

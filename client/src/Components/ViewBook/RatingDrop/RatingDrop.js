@@ -8,81 +8,76 @@ import { useSelector } from 'react-redux';
 import Message from '../../Message/Message';
 
 const RatingDrop = () => {
-    const {id} = useParams();
-    const [message,setMessage] = useState(false);
+    const { id } = useParams();
+    const [isMessage, setMessage] = useState(false);
+    const [container, setContainer] = useState(true)
     const essentials = useSelector(state => state.essentials)
 
-
     const handleRating = (rate) => {
-        instance.post('/post-rating',{bookId:id, userId: essentials.userData.uid,rate:rate})
-       .then(res =>{
-           console.log(res);
-           setMessage("Rated!!!")
-           setTimeout(()=>{
-               setMessage(false)
-           },2500)
-       })
+        setContainer(false);
+        instance.post('/post-rating', { bookId: id, userId: essentials.userData.uid, rate: rate })
+            .then(res => {
+                console.log(res);
+                setMessage(true)
+               
+            })
     }
     return (
-        <div className="rating-drop-container">
-        {message?null:
-        <>
-        {message&&<Message message={message}/>}
-        <ul>
-            <li>
-                <button onClick={() => handleRating(1)}>
-                    <StarIcon />
-                    <StarOutlineIcon />
-                    <StarOutlineIcon />
-                    <StarOutlineIcon />
-                    <StarOutlineIcon />
-                </button>
+        <div className={container?"rating-drop-container":"rating-drop-container-hide"}>
+
+            {isMessage && <Message message="Rated!!" link="/book"/>}
+            <ul>
+                <li>
+                    <button onClick={() => handleRating(1)}>
+                        <StarIcon />
+                        <StarOutlineIcon />
+                        <StarOutlineIcon />
+                        <StarOutlineIcon />
+                        <StarOutlineIcon />
+                    </button>
 
 
-            </li>
-            <li>
-                <button onClick={() => handleRating(2)}>
-                    <StarIcon />
-                    <StarIcon />
-                    <StarOutlineIcon />
-                    <StarOutlineIcon />
-                    <StarOutlineIcon />
-                </button>
+                </li>
+                <li>
+                    <button onClick={() => handleRating(2)}>
+                        <StarIcon />
+                        <StarIcon />
+                        <StarOutlineIcon />
+                        <StarOutlineIcon />
+                        <StarOutlineIcon />
+                    </button>
 
-            </li>
-            <li>
-                <button onClick={() => handleRating(3)}>
-                    <StarIcon />
-                    <StarIcon />
-                    <StarIcon />
-                    <StarOutlineIcon />
-                    <StarOutlineIcon />
-                </button>
+                </li>
+                <li>
+                    <button onClick={() => handleRating(3)}>
+                        <StarIcon />
+                        <StarIcon />
+                        <StarIcon />
+                        <StarOutlineIcon />
+                        <StarOutlineIcon />
+                    </button>
 
-            </li>
-            <li>
-                <button onClick={() => handleRating(4)}>
-                    <StarIcon />
-                    <StarIcon />
-                    <StarIcon />
-                    <StarIcon />
-                    <StarOutlineIcon />
-                </button>
+                </li>
+                <li>
+                    <button onClick={() => handleRating(4)}>
+                        <StarIcon />
+                        <StarIcon />
+                        <StarIcon />
+                        <StarIcon />
+                        <StarOutlineIcon />
+                    </button>
 
-            </li>
-            <li>
-                <button onClick={() => handleRating(5)}>
-                    <StarIcon />
-                    <StarIcon />
-                    <StarIcon />
-                    <StarIcon />
-                    <StarIcon />
-                </button>
-            </li>
-        </ul>
-    
-        </>
-        }
+                </li>
+                <li>
+                    <button onClick={() => handleRating(5)}>
+                        <StarIcon />
+                        <StarIcon />
+                        <StarIcon />
+                        <StarIcon />
+                        <StarIcon />
+                    </button>
+                </li>
+            </ul>
         </div>
     )
 }
