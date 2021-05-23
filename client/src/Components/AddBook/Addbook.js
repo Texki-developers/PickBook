@@ -7,6 +7,9 @@ import firebase from '../../Assets/FirebaseConfig/firebaseConfig'
 import instance from '../../Assets/server/instance';
 import NotLoggedIn from '../NotLoggedIn/NotLoggedIn';
 import Actions from '../../Assets/Essentials/EssentialAction';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -88,6 +91,7 @@ const Addbook = () => {
         console.log(res.data.status);
       })
     })
+    
   }
 
   return (
@@ -109,10 +113,29 @@ const Addbook = () => {
             <TextField className="inputs" label="Book title" required name='title' onChange={handleInput} />
             <TextField className="inputs" label="Link to purchase" required name='link' onChange={handleInput} />
           </div>
-          <div className="inputs-container">
-            <TextField className="input_cent" label="Language" required name='Language' onChange={handleInput} />
-            <TextField className="input_cent" label="Genre" required name='Genres' onChange={handleInput} />
-            <TextField className="input_cent" label="Year of Publication" required name='year' onChange={handleInput} />
+          <div className="inputs_dropdown">
+            <div className="input_cent">
+              <InputLabel id="add_language">Language</InputLabel>
+              <Select labelId="add_language" onChange={handleInput} name='Language'>
+                {essentials.languages.map((d,i)=>(
+                <MenuItem value={d} key={i}>{d}</MenuItem>
+                ))}
+              </Select>
+            </div>
+            <div className="input_cent">
+              <InputLabel id="add_genere">Genres</InputLabel>
+              <Select
+                labelId="add_genere"
+                name='Genres'
+                onChange={handleInput}
+              >
+                {essentials.genres.map((d,i)=>(
+                  <MenuItem value={d} key={i}>{d}</MenuItem>
+                ))}
+              </Select>
+            </div>
+            <TextField   type='number'
+              onChange={handleInput} label="year" required name='year' />
   
           </div >
   

@@ -12,6 +12,11 @@
             stroke: #fff;
         }
     }
+    img{
+        object-fit: contain;
+        width: 15px;
+        border-radius: 15px;
+    }
     .for-click{
         position: absolute;
         width: 100%;
