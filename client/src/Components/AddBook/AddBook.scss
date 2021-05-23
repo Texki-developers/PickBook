@@ -29,6 +29,22 @@
         display:flex;
     }
 
+    .inputs_dropdown{
+        display: flex;
+        width: 100%;
+        margin-top: 20px;
+
+        .input_cent{
+            width:29%;
+            margin: 0 8px 0;
+            .MuiInput-underline{
+                width: 100%;
+            }
+        }
+        .MuiFormControl-root {
+            width: 29%;
+        }
+    }
     .inputs-container{
         
         width: 100%;
@@ -47,10 +63,7 @@
         min-width: 90%;
    
     }   
-    .input_cent{
-        width: 29%;
-         
-    }
+    
   
         
     
@@ -122,6 +135,20 @@
     }
     #frm{
 
+        .inputs_dropdown{
+            flex-direction: column;
+    
+            .input_cent{
+                width:100%;
+                margin: 0;
+                .MuiInput-underline{
+                    width: 100%;
+                }
+            }
+            .MuiFormControl-root {
+                width: 100%;
+            }
+        }
 
     .inputs-container{
         margin: 0;
