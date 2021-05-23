@@ -11,8 +11,6 @@ const Home = () => {
     useEffect(() => {
         const getHomeBooks = async () => {
             instance.get('/get-home-books').then(async (response) => {
-                // console.log("response",response);
-                // console.log(homeBooks);
                 if(response.status === 200){
                     await setHomeBooks(
                         {
@@ -22,7 +20,6 @@ const Home = () => {
                     setLoading(false)
                 }else{
                     getHomeBooks();
-                    // console.log("no data");
                 }
             })
         }

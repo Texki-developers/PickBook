@@ -65,7 +65,6 @@ router.get('/getonebook/:id',(req,res)=>{
 router.get('/reviews/:id',(req,res) => {
   userHelpers.getReviews(req.params.id).then((reviews) => {
     userHelpers.getReviewsCount(req.params.id).then((count)=>{
-      console.log(reviews);
       res.json({reviews:reviews,reviewCount:count})
     })
   }).catch((err) => {
@@ -86,7 +85,6 @@ router.post('/add-comment',(req,res) => {
 })
 
 router.post('/like-or-dislike',(req,res) => {
-  console.log("comment-details" ,req.body);
   userHelpers.likeReview(req.body).then(() =>{
     res.json({status:true});
   })
@@ -96,7 +94,6 @@ router.post('/like-or-dislike',(req,res) => {
 router.post('/post-rating',(req,res) =>{
   console.log(req.body);
   userHelpers.rateBook(req.body).then(response=>{
-    console.log("book rated",response);
     res.json({status:true})
   })
 })
@@ -107,17 +104,17 @@ router.get('/logout',(req,res)=>{
 })
 
 router.post('/filter',(req,res)=>{
-  // console.log(req.body);
+
   userHelpers.filterdata(req.body).then(data=>{
-    // console.log(data);
+
     res.json(data)
   })
 })
 
 router.post('/search',(req,res)=>{
-  // console.log(req.body);
+
   userHelpers.searchData(req.body).then(data=>{
-    // console.log(data);
+
     res.json(data)
   })
 })

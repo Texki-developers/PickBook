@@ -28,7 +28,6 @@ const ViewBook = () => {
     const getBook = async () => {
       await instance.get(`/getonebook/${id}`).then(async res => {
         if (res.status === 200) {
-          // console.log(res);
           await SetDetails(res.data[0])
           await setLoading(false)
         } else {
@@ -38,20 +37,16 @@ const ViewBook = () => {
     }
     const getReviews = () => {
       instance.get(`/reviews/${id}`).then(async res => {
-        console.log(res.data);
         setReviews(res.data)
         if (res.data.reviewCount !== 0) {
           setIsReview(true)
-          console.log("false");
         } else {
           setIsReview(false)
-          console.log(true);
         }
       })
     },
       getRating = () => {
         instance.get(`/rating/${id}`).then(res => {
-          console.log("rating ", res);
           setRatingValue(res.data);
         })
       }
@@ -65,7 +60,6 @@ const ViewBook = () => {
     if (essentials.userData) {
       setIsCommentInput(!isCommentInput);
     } else {
-      console.log("message");
       setIsMessage("Please login to write you review")
       setTimeout(() => {
         setIsMessage(false)
@@ -138,7 +132,7 @@ const ViewBook = () => {
             }
           </>
           : <h5>No reviews yet</h5>}
-        {isReview && <button>Show More</button>}
+        <button>Show More</button>
       </div>
   );
 }

@@ -11,7 +11,6 @@ function SignButton(props) {
             
             dispatch(Actions.addUserData(userData));
         })
-        console.log('login process');
     }
     return (
         <button onClick={() => handleAuth(props.provider)}  className={props.class}>

@@ -13,18 +13,21 @@
      font-size: 2rem;
      font-weight: bold;
      color: #2E313A;
-     
+     padding-top: 21rem;
 
     }
-  
+    .makeStyles-root-2 > * {
+        width: 25ch;
+        margin: 0;
+    }
 
 }
 #frm{
     
     max-width: 1253px;
     width: 85%;
-    
-   
+    padding: 5rem 0; 
+    padding-top: 1rem;
     .photo_upload{
         display:flex;
     }

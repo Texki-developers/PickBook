@@ -22,7 +22,6 @@ function App() {
   useEffect(()=>{
     const checkUser = async()=>{
       const userData = await instance.get('/checkuser');
-      console.log(userData.data)
       if(userData.data.status){
         dispatch(Actions.addUserData(userData.data.data))
       }

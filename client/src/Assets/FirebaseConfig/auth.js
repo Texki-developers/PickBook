@@ -19,7 +19,6 @@ const socialMediaAuth = (provider) => {
                     photo: res.user.photoURL
                 };
                 instance.post('/login', userData).then(res => {
-                    console.log(res);
                     resolve(userData);
                 })
 
