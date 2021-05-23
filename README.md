@@ -4,10 +4,7 @@ Pickbooks is an book searching website.Users can log in using their facebook or 
 
 ## Developers of PICKBOOKS
 
-### 1.Muhsin
-[1](https://github.com/MUHSIN22/ "Link to Github")
-[2](https://www.linkedin.com/in/muhsin-neyyathur-515129208 "Link to Linkedin")
-[3](https://instagram.com/_muhsin22?utm_medium=copy_link "Link to Instagram")
+### 1.[Muhsin](https://instagram.com/_muhsin22?utm_medium=copy_link "Link to Instagram")
 
 ### 2.Amshen
 [1](https://github.com/AmshenShanu07 "Link to Github")
