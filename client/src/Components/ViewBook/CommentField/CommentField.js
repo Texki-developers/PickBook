@@ -7,6 +7,8 @@ import './CommentField.scss'
 const CommentField = (props) => {
     const essentials = useSelector(state => state.essentials)
     const [message,setMessage] = useState(null)
+    // const [isEmpty,setIsMessage] = useState(false)
+
     const handleCommentSubmit = (event) => {
         event.preventDefault();
         const data = {
@@ -14,6 +16,7 @@ const CommentField = (props) => {
             bookId : event.target[0].id,
             reviewer: essentials.userData.uid
         }
+        // window.location.reload()npm
         if(data.review!==''){
             instance.post('/add-comment',data).then((response) => {
                 setMessage(response.data.message);

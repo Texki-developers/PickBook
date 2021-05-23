@@ -35,6 +35,10 @@ const ViewBook = () => {
         }
       })
     }
+
+
+    
+
     const getReviews = () => {
       instance.get(`/reviews/${id}`).then(async res => {
         setReviews(res.data)
@@ -66,6 +70,8 @@ const ViewBook = () => {
       }, 3000)
     }
   }
+
+
 
   const handleRatingClick = () => {
     if (essentials.userData) {
