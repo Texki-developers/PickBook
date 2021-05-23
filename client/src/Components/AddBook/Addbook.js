@@ -32,7 +32,6 @@ const Addbook = () => {
   const dispatch = useDispatch();
   
   useEffect(() => {
-    // console.log("component will mount");
     dispatch(Actions.addIconToggle());
   }, [dispatch]);
 
@@ -44,6 +43,7 @@ const Addbook = () => {
   
   const viewImage = (event) => {
     setFile(event.target.files[0]);
+    console.log("asdfjaksdjfasdddddddddddddddddddddddd",event.target.file[0]);
     var date = new Date();
     setFileName(date.getTime() + "-" + date.getDate() + "-" + date.getFullYear() + "-" + date.getMonth() + "-")
   }

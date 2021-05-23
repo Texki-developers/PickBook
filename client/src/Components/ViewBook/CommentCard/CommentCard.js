@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import './CommentCard.scss'
 import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
 import ThumbDownAltOutlinedIcon from '@material-ui/icons/ThumbDownAltOutlined';
@@ -7,15 +7,14 @@ import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 import instance from '../../../Assets/server/instance';
 import { useSelector } from 'react-redux';
 import Message from '../../Message/Message';
-import { useParams } from 'react-router-dom';
+
 
 
 function CommentCard(props) {
-  const {id} = useParams();
   const [liked,setLiked] = useState(false)
   const [unliked,setUnliked] = useState(false)
   const [message,SetMessage] = useState(false)
-  const commId = props._id
+
   const essentials = useSelector(state => state.essentials)
 
   const like = (commentId,condition)=>{
@@ -29,7 +28,6 @@ function CommentCard(props) {
       setLiked(true)
     }
   }
-
 
   const unlike = (commentId,condition)=>{
     handleLike(commentId,condition);
